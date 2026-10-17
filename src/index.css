@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  /* Architectural Palette */
+  --color-ivory: #F6F4EF;
+  --color-ivory-light: #FCFAF6;
+  --color-ivory-warm: #EFECE3;
+  --color-charcoal: #20211E;
+  --color-charcoal-muted: #53554D;
+  --color-charcoal-subtle: #797C72;
+  --color-charcoal-pure: #151614;
+  --color-olive: #777B60;
+  --color-olive-dark: #5A5E44;
+  --color-olive-light: #ECEEE3;
+  --color-olive-tint: #F3F5EC;
+  --color-stone: #E9E5DC;
+  --color-stone-light: #F2EFE8;
+  --color-stone-dark: #D3CDC0;
+
+  /* Typography Families */
+  --font-serif: 'Cormorant Garamond', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Elevation & Shadows (Understated & architectural, no excessive drop shadows) */
+  --shadow-editorial: 0 2px 12px -2px rgba(32, 33, 30, 0.04), 0 1px 4px -1px rgba(32, 33, 30, 0.02);
+  --shadow-editorial-hover: 0 10px 28px -4px rgba(32, 33, 30, 0.07), 0 2px 8px -2px rgba(32, 33, 30, 0.03);
+  --shadow-floating: 0 20px 48px -12px rgba(32, 33, 30, 0.12);
+
+  /* Border Radii (Subtle, crisp architectural corners) */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Animation Easings */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    --bg-page: #F6F4EF;
+    --text-primary: #20211E;
+    --text-muted: #53554D;
+    --border-subtle: #E9E5DC;
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: 2px solid #20211E;
+    outline-offset: 2px;
+  }
+
+  /* Editorial selection */
+  ::selection {
+    background-color: #20211E;
+    color: #F6F4EF;
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+      transition-delay: 0ms !important;
+      animation-delay: 0ms !important;
+    }
+
+    .group:hover img,
+    .group:hover div,
+    button:hover,
+    a:hover {
+      transform: none !important;
+    }
+  }
+}
+
+/* Custom architectural utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
