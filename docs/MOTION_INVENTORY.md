@@ -127,3 +127,40 @@ When implementing features in future phases:
 - **Truthful Demo Checkout (`/checkout`)**: Subtle inline error validation animations, loading state with spinning SVG indicator, and clear disclaimer that this is a simulated design demonstration (no real card data or payment).
 - **Celebratory Confirmation (`/checkout/confirmation`)**: Masked title reveal, animated order reference banner, simulated license key display, and simulated asset package download trigger.
 
+---
+
+## 7. Phase 5 Implementation Reference: Universal Motion Integration
+
+Every route and shared component across Tangent Studio is now integrated into the architectural motion system:
+
+### 7.1 Studio Practice Monograph (`/about`, `/studio`)
+- **Editorial Monograph Cover**: Cinematic clip-up reveal on Nordic Forest Pavilion banner with subtle scale expansion.
+- **Tectonic Philosophy Pillars**: Staggered cards with `CardHover` (4px elevation + border highlight), custom iconography, and responsive grid reflow.
+- **Methodology & Leadership**: 4-stage architectural journey and studio leadership cards choreographed with `StaggerGroup`.
+
+### 7.2 Services & Disciplines (`/services`)
+- **Disciplinary Showcase**: Four comprehensive architectural discipline profiles (Bespoke Residential, Cultural & Civic, Interior Architecture & Joinery, Computational Visualization & Licensing).
+- **Deliverables & Specifications**: Alternating layout with `ScrollReveal`, BIM sub-millimeter metrics, and direct inquiry actions.
+
+### 7.3 Journal & Spatial Research (`/journal`, `/journal/:slug`)
+- **Article Index**: Publication-grade lead essay with interactive cover zoom, reading time badges, and staggered archive cards.
+- **Comfortable Reading Layout**: Max-width typographic measures, masked headlines, drop quotes, figure captions, and related research recommendations.
+
+### 7.4 Frequently Asked Questions (`/faq`)
+- **Categorized Tabs**: Architectural Practice, Digital Products, and Billing operations.
+- **Accessible Accordion**: Animated height transitions with Framer Motion `AnimatePresence`, full keyboard navigation, and aria-expanded state attributes.
+
+### 7.5 Contact & Simulated Inquiries (`/contact`)
+- **Accessible Form Feedback**: Animated inline error message reveals with zero layout displacement.
+- **Receipt Transition**: Coordinated state swap between inquiry brief and verified prototype receipt with reference codes.
+- **Verified Coordinates**: Interactive cards with verified Google Maps navigation links.
+
+### 7.6 404 Architectural Disconnection (`*`)
+- **Editorial Identity**: Masked 404 headline, spinning coordinate compass, and direct links to Studio Main, Built Projects, and Digital Shop.
+
+### 7.7 Shared Navigation & Global Footer
+- **Mobile Menu Drawer**: Smooth slide-down with keyboard trapping, escape dismissal, and quick-links to Research & Practice (Services, Journal, FAQ).
+- **Global Footer**: Staggered columns with `HoverUnderline` active indicators, studio coordinates, and comprehensive monograph sitemap.
+- **Shared States**: `EmptyState` and `LoadingState` enhanced with smooth entrance animations and consistent warm ivory architectural styling.
+
+

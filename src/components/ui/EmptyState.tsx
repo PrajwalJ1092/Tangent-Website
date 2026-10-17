@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { motion } from 'motion/react'
 import { FolderArchive } from 'lucide-react'
 import { Button } from './Button'
 import { cn } from '@/lib/utils'
@@ -23,9 +24,13 @@ export function EmptyState({
   className,
 }: EmptyStateProps) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        'flex flex-col items-center justify-center p-12 text-center border border-[#E9E5DC] rounded-lg bg-[#FCFAF6] max-w-lg mx-auto',
+        'flex flex-col items-center justify-center p-12 text-center border border-[#E9E5DC] bg-[#FCFAF6] max-w-lg mx-auto',
         className,
       )}
     >
@@ -44,6 +49,6 @@ export function EmptyState({
           {actionLabel}
         </Button>
       )}
-    </div>
+    </motion.div>
   )
 }

@@ -243,6 +243,35 @@ export function Navbar() {
                 <span>{link.name}</span>
               </NavLink>
             ))}
+
+            <div className="pt-2 flex flex-col gap-2">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#777B60]">
+                Research &amp; Practice
+              </span>
+              <div className="grid grid-cols-3 gap-2">
+                <NavLink
+                  to="/services"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-mono text-[#53554D] bg-[#EFECE6]/50 border border-[#E9E5DC] text-center hover:text-[#20211E]"
+                >
+                  Services
+                </NavLink>
+                <NavLink
+                  to="/journal"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-mono text-[#53554D] bg-[#EFECE6]/50 border border-[#E9E5DC] text-center hover:text-[#20211E]"
+                >
+                  Journal
+                </NavLink>
+                <NavLink
+                  to="/faq"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-mono text-[#53554D] bg-[#EFECE6]/50 border border-[#E9E5DC] text-center hover:text-[#20211E]"
+                >
+                  FAQ
+                </NavLink>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

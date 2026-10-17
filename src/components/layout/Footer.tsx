@@ -57,8 +57,23 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/services" className="text-[#53554D] hover:text-[#20211E] transition-colors">
+                    <HoverUnderline lineColor="bg-[#20211E]">Services &amp; Disciplines</HoverUnderline>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/journal" className="text-[#53554D] hover:text-[#20211E] transition-colors">
+                    <HoverUnderline lineColor="bg-[#20211E]">Journal</HoverUnderline>
+                  </Link>
+                </li>
+                <li>
                   <Link to="/shop" className="text-[#53554D] hover:text-[#20211E] transition-colors">
                     <HoverUnderline lineColor="bg-[#20211E]">Digital Shop</HoverUnderline>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/faq" className="text-[#53554D] hover:text-[#20211E] transition-colors">
+                    <HoverUnderline lineColor="bg-[#20211E]">FAQ</HoverUnderline>
                   </Link>
                 </li>
                 <li>

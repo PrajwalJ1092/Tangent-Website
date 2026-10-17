@@ -61,6 +61,20 @@ if (typeof window !== 'undefined') {
   })
 }
 
+// Global animation frame fallbacks for test teardown resilience
+if (typeof global !== 'undefined') {
+  if (!global.requestAnimationFrame) {
+    global.requestAnimationFrame = (callback: FrameRequestCallback): number => {
+      return setTimeout(() => callback(Date.now()), 16) as unknown as number
+    }
+  }
+  if (!global.cancelAnimationFrame) {
+    global.cancelAnimationFrame = (id: number): void => {
+      clearTimeout(id)
+    }
+  }
+}
+
 afterEach(() => {
   cleanup()
 })
