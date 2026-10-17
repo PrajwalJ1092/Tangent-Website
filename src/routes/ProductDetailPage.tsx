@@ -11,6 +11,14 @@ import {
   HardDrive,
   Info,
   Sparkles,
+  Maximize2,
+  ChevronDown,
+  ChevronUp,
+  CheckCircle2,
+  HelpCircle,
+  Users,
+  Layers,
+  ArrowRight,
 } from 'lucide-react'
 import {
   Container,
@@ -25,6 +33,9 @@ import { getProductBySlug, getRelatedProducts } from '@/data/products'
 import { formatPaiseToInr, calculateDiscountPercent } from '@/lib/formatters'
 import { useCart } from '@/context/useCart'
 import { MARKETPLACE_CATEGORIES } from '@/types/product'
+import { ProductPreviewLightbox } from '@/components/products/ProductPreviewLightbox'
+import { ProductReviewsSection } from '@/components/products/ProductReviewsSection'
+import { StickyPurchaseBar } from '@/components/products/StickyPurchaseBar'
 
 export function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -33,6 +44,8 @@ export function ProductDetailPage() {
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [isAdded, setIsAdded] = useState(false)
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const [expandedFaqIndex, setExpandedFaqIndex] = useState<number | null>(0)
 
   // Fallback if product does not exist
   if (!product) {
@@ -58,9 +71,10 @@ export function ProductDetailPage() {
   }
 
   // Gallery of all images for the product
-  const gallery = product.previewImages && product.previewImages.length > 0
-    ? product.previewImages
-    : [product.coverImage]
+  const gallery =
+    product.previewImages && product.previewImages.length > 0
+      ? product.previewImages
+      : [product.coverImage]
 
   const activeImage = gallery[activeImageIndex] || product.coverImage
 
@@ -88,6 +102,10 @@ export function ProductDetailPage() {
     }, 2500)
   }
 
+  const toggleFaq = (index: number) => {
+    setExpandedFaqIndex(expandedFaqIndex === index ? null : index)
+  }
+
   return (
     <div className="py-10 space-y-16">
       <Container>
@@ -112,16 +130,18 @@ export function ProductDetailPage() {
 
         {/* Main Product Layout: 2 Columns */}
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Column: Image Preview Gallery (7 cols) */}
-          <div className="lg:col-span-7 space-y-4">
-            {/* Main Stage Image */}
-            <div className="relative border border-[#E9E5DC] bg-[#EFECE6]/40 overflow-hidden">
+          {/* Left Column: Image Preview Gallery & Spreads (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Main Stage Image with Lightbox Zoom Trigger */}
+            <div className="relative border border-[#E9E5DC] bg-[#EFECE6]/40 overflow-hidden group">
               <ImageFrame
                 src={activeImage.url}
                 alt={activeImage.alt}
                 aspectRatio="wide"
                 className="w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
               />
+
+              {/* Badges Overlay */}
               <div className="absolute top-4 left-4 flex gap-2">
                 <Badge variant="default" className="bg-[#20211E]/80 text-[#F6F4EF] backdrop-blur-sm border-none">
                   Demo Asset
@@ -133,8 +153,21 @@ export function ProductDetailPage() {
                   </Badge>
                 )}
               </div>
-              <div className="absolute bottom-3 right-3 text-[11px] font-mono uppercase tracking-wider text-[#20211E]/80 bg-white/90 px-2.5 py-1 backdrop-blur-sm border border-[#E9E5DC]">
-                {activeImageIndex + 1} of {gallery.length} Views
+
+              {/* View Count & Fullscreen trigger */}
+              <div className="absolute bottom-3 right-3 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsLightboxOpen(true)}
+                  className="inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-wider text-[#20211E] bg-white/95 hover:bg-white px-2.5 py-1 backdrop-blur-sm border border-[#E9E5DC] shadow-sm transition-colors"
+                  aria-label="Enlarge spread in high-resolution lightbox"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>Enlarge Preview</span>
+                </button>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#20211E]/80 bg-white/90 px-2.5 py-1 backdrop-blur-sm border border-[#E9E5DC]">
+                  {activeImageIndex + 1} of {gallery.length} Views
+                </span>
               </div>
             </div>
 
@@ -166,8 +199,78 @@ export function ProductDetailPage() {
               </div>
             )}
 
+            {/* What's Included / Highlights Breakdown */}
+            {product.highlights && product.highlights.length > 0 && (
+              <div className="border border-[#E9E5DC] bg-white p-6 sm:p-8 space-y-4 rounded-sm text-left shadow-editorial">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60]">
+                  <Layers className="w-4 h-4" />
+                  <span>Deliverables &amp; Master Contents</span>
+                </div>
+                <h3 className="font-serif text-2xl text-[#20211E] font-normal">
+                  What You Receive with This Studio Package
+                </h3>
+                <ul className="space-y-3 pt-2">
+                  {product.highlights.map((highlight, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#53554D] leading-relaxed">
+                      <CheckCircle2 className="w-4 h-4 text-[#777B60] shrink-0 mt-0.5" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Who Is This For */}
+            {product.targetAudience && product.targetAudience.length > 0 && (
+              <div className="border border-[#E9E5DC] bg-[#FCFAF6] p-6 sm:p-8 space-y-4 rounded-sm text-left">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60]">
+                  <Users className="w-4 h-4" />
+                  <span>Practitioner Fit</span>
+                </div>
+                <h3 className="font-serif text-2xl text-[#20211E] font-normal">
+                  Who Is This Resource Crafted For?
+                </h3>
+                <ul className="space-y-2.5 pt-2">
+                  {product.targetAudience.map((audience, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#53554D] leading-relaxed">
+                      <span className="font-mono text-xs text-[#777B60] font-semibold">0{idx + 1}.</span>
+                      <span>{audience}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* How To Use It 3-Step Workflow */}
+            {product.howToUse && product.howToUse.length > 0 && (
+              <div className="border border-[#E9E5DC] bg-white p-6 sm:p-8 space-y-6 rounded-sm text-left shadow-editorial">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60]">
+                  <Clock className="w-4 h-4" />
+                  <span>Workflow Integration</span>
+                </div>
+                <h3 className="font-serif text-2xl text-[#20211E] font-normal">
+                  How to Integrate into Your Studio Practice
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                  {product.howToUse.map((step) => (
+                    <div key={step.step} className="space-y-2 p-4 bg-[#FCFAF6] border border-[#E9E5DC]/80 rounded-sm">
+                      <span className="font-mono text-xs uppercase tracking-widest text-[#777B60] font-bold">
+                        Step {step.step}
+                      </span>
+                      <h4 className="font-serif text-lg text-[#20211E]">
+                        {step.title}
+                      </h4>
+                      <p className="font-sans text-xs text-[#53554D] leading-relaxed font-light">
+                        {step.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Included Source Files & Formats Card */}
-            <div className="mt-8 border border-[#E9E5DC] bg-[#FCFAF6] p-6 space-y-4">
+            <div className="border border-[#E9E5DC] bg-[#FCFAF6] p-6 space-y-4 rounded-sm text-left">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60]">
                 <FileCode className="w-4 h-4" />
                 <span>Verified Archive Contents ({product.includedFiles.length} Items)</span>
@@ -187,7 +290,7 @@ export function ProductDetailPage() {
           </div>
 
           {/* Right Column: Pricing, Specs, License & Cart CTA (5 cols) */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="lg:col-span-5 space-y-8 text-left">
             {/* Header info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3">
@@ -208,19 +311,19 @@ export function ProductDetailPage() {
                 )}
               </div>
 
-              <h1 className="font-serif text-3xl md:text-4xl text-[#20211E] leading-tight">
+              <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#20211E] leading-tight font-normal">
                 {product.name}
               </h1>
 
-              <p className="font-sans text-sm text-[#53554D] leading-relaxed">
+              <p className="font-sans text-sm sm:text-base text-[#53554D] leading-relaxed font-light">
                 {product.shortDescription}
               </p>
             </div>
 
             {/* Price block */}
-            <div className="p-6 border border-[#E9E5DC] bg-white space-y-4">
+            <div className="p-6 sm:p-8 border border-[#E9E5DC] bg-white space-y-4 rounded-sm shadow-editorial">
               <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-serif font-normal text-[#20211E]">
+                <span className="text-3xl sm:text-4xl font-serif font-normal text-[#20211E]">
                   {formatPaiseToInr(product.priceInPaise)}
                 </span>
                 {product.compareAtPriceInPaise && (
@@ -237,7 +340,7 @@ export function ProductDetailPage() {
 
               <div className="text-[11px] font-mono text-[#777B60] flex items-center gap-1.5">
                 <Check className="w-3.5 h-3.5 text-emerald-700" />
-                <span>One-time investment • Perpetual commercial studio usage</span>
+                <span>One-time studio investment • Perpetual commercial usage</span>
               </div>
 
               {/* Add to Cart CTA */}
@@ -307,13 +410,13 @@ export function ProductDetailPage() {
               <h3 className="text-xs font-mono uppercase tracking-widest text-[#777B60]">
                 Design Specification &amp; Monograph Notes
               </h3>
-              <div className="space-y-3 font-sans text-xs text-[#53554D] leading-relaxed whitespace-pre-line">
+              <div className="space-y-3 font-sans text-xs sm:text-sm text-[#53554D] leading-relaxed whitespace-pre-line font-light">
                 {product.fullDescription}
               </div>
             </div>
 
             {/* Transparent License Information (Visible Before Purchase) */}
-            <div className="border border-[#E9E5DC] bg-[#FCFAF6] p-5 space-y-3">
+            <div className="border border-[#E9E5DC] bg-[#FCFAF6] p-5 space-y-3 rounded-sm">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#20211E]">
                 <ShieldCheck className="w-4 h-4 text-[#777B60]" />
                 <span>Transparent Licensing Summary</span>
@@ -331,8 +434,45 @@ export function ProductDetailPage() {
               </div>
             </div>
 
+            {/* Product FAQs Accordion */}
+            {product.faqs && product.faqs.length > 0 && (
+              <div className="space-y-3 border-t border-[#E9E5DC] pt-6">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60]">
+                  <HelpCircle className="w-4 h-4" />
+                  <span>Frequently Asked Questions</span>
+                </div>
+                <div className="divide-y divide-[#E9E5DC] border-y border-[#E9E5DC]">
+                  {product.faqs.map((faq, idx) => {
+                    const isExpanded = expandedFaqIndex === idx
+                    return (
+                      <div key={idx} className="py-3">
+                        <button
+                          type="button"
+                          onClick={() => toggleFaq(idx)}
+                          className="w-full flex items-center justify-between text-left text-xs sm:text-sm font-medium text-[#20211E] hover:text-[#777B60] transition-colors"
+                          aria-expanded={isExpanded}
+                        >
+                          <span>{faq.question}</span>
+                          {isExpanded ? (
+                            <ChevronUp className="w-4 h-4 text-[#777B60] shrink-0" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-[#777B60] shrink-0" />
+                          )}
+                        </button>
+                        {isExpanded && (
+                          <p className="mt-2 text-xs text-[#53554D] leading-relaxed font-sans font-light">
+                            {faq.answer}
+                          </p>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Delivery Terms */}
-            <div className="border border-[#E9E5DC] bg-white p-5 space-y-2">
+            <div className="border border-[#E9E5DC] bg-white p-5 space-y-2 rounded-sm shadow-editorial">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#20211E]">
                 <Download className="w-4 h-4 text-[#777B60]" />
                 <span>Instant Digital Delivery</span>
@@ -352,7 +492,7 @@ export function ProductDetailPage() {
                   <Link
                     key={tag}
                     to={`/shop?q=${encodeURIComponent(tag)}`}
-                    className="text-[11px] font-mono text-[#53554D] bg-[#EFECE6] px-2 py-0.5 hover:text-[#20211E] transition-colors"
+                    className="text-[11px] font-mono text-[#53554D] bg-[#EFECE6] px-2 py-0.5 hover:text-[#20211E] transition-colors rounded-sm"
                   >
                     #{tag}
                   </Link>
@@ -361,13 +501,22 @@ export function ProductDetailPage() {
             )}
           </div>
         </div>
+
+        {/* Customer Reviews & Rating Distribution Section */}
+        <ProductReviewsSection
+          productId={product.id}
+          productName={product.name}
+          rating={product.rating || 4.9}
+          reviewsCount={product.reviewsCount || 38}
+          initialReviews={product.reviewsList}
+        />
       </Container>
 
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
         <section className="border-t border-[#E9E5DC] bg-[#FCFAF6] py-16">
           <Container>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 text-left">
               <div>
                 <div className="text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
                   Complementary Tools
@@ -380,7 +529,8 @@ export function ProductDetailPage() {
                 to="/shop"
                 className="text-xs font-mono uppercase tracking-wider text-[#777B60] hover:text-[#20211E] transition-colors flex items-center gap-1"
               >
-                View Full Catalog →
+                <span>View Full Catalog</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
@@ -392,6 +542,23 @@ export function ProductDetailPage() {
           </Container>
         </section>
       )}
+
+      {/* Lightbox Modal */}
+      <ProductPreviewLightbox
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        images={gallery}
+        currentIndex={activeImageIndex}
+        onIndexChange={setActiveImageIndex}
+        productTitle={product.name}
+      />
+
+      {/* Sticky Quick-Purchase Bar on Scroll */}
+      <StickyPurchaseBar
+        product={product}
+        onAddToCart={handleAddToCart}
+        isAdded={isAdded}
+      />
     </div>
   )
 }

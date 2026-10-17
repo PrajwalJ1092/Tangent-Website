@@ -55,6 +55,50 @@ export const PRODUCTS: DigitalProduct[] = [
     tags: ['blender', 'interior', 'cycles', 'pbr', 'minimalism'],
     fileSize: '4.6 GB (uncompressed)',
     lastUpdated: 'October 2025',
+    deliverableType: '3D Scene Environment',
+    pageCount: '1 Complete Scene + 24 Assets',
+    highlights: [
+      'Native Blender 4.2+ Cycles scene with physically calibrated sun-sky daylight rig',
+      '24 bespoke tectonic furniture and architectural props with millimeter accuracy',
+      '16 seamless 8K PBR material setups with albedo, roughness, normal & displacement',
+      'Includes 3 publication-ready camera compositions with Depth of Field & color grade LUT',
+    ],
+    targetAudience: [
+      'Architects and interior designers presenting photo-real residential designs to discerning clients',
+      '3D visualization artists seeking a publication-grade Scandinavian architectural scene file',
+      'Design studios aiming to skip 40+ hours of prop modeling, shader development, and light calibration',
+    ],
+    howToUse: [
+      {
+        step: '01',
+        title: 'Open in Blender or Import FBX',
+        description: 'Launch the native .blend file in Blender 4.0+ or import the high-poly FBX/OBJ into 3ds Max, Maya, or Unreal Engine.',
+      },
+      {
+        step: '02',
+        title: 'Adjust Sun Azimuth & Materials',
+        description: 'Rotate the sun angle to match your geographical site coordinates and swap materials using our pre-built node groups.',
+      },
+      {
+        step: '03',
+        title: 'Render Publication-Ready Stills',
+        description: 'Press render in Cycles. Pre-tuned denoising and exposure profiles yield noise-free 4K renderings in minutes.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Do I need commercial third-party add-ons to render this scene?',
+        answer: 'No. The entire scene is 100% native Blender Cycles with zero paid external plug-in dependencies.',
+      },
+      {
+        question: 'Can I export the individual furniture models into other projects?',
+        answer: 'Yes. The license allows unlimited extraction of individual chairs, lamps, and materials into any of your commercial commissions.',
+      },
+      {
+        question: 'Are high-resolution textures included?',
+        answer: 'Yes. The package contains complete 8K PBR texture maps with diffuse, roughness, normal, and height displacement channels.',
+      },
+    ],
     // Compatibility fields
     headline: 'Photorealistic architectural interior with accurate daylight & Cycles PBR setup',
     description: 'Complete interior scene file modeled with architectural precision.',
@@ -114,6 +158,46 @@ export const PRODUCTS: DigitalProduct[] = [
     tags: ['indesign', 'figma', 'portfolio', 'monograph', 'editorial'],
     fileSize: '380 MB',
     lastUpdated: 'September 2025',
+    deliverableType: 'Editorial Monograph System',
+    pageCount: '48 Editorial Master Spreads',
+    highlights: [
+      '48-page editorial architecture monograph layout in InDesign (.indd & .idml) and Figma',
+      'Swiss 12-column baseline grid with proportional negative margins and editorial spreads',
+      'Complete typography hierarchy featuring Cormorant Garamond and clean sans pairing',
+      'Print-ready CMYK export presets with bleeds & crop marks + digital interactive PDF preset',
+    ],
+    targetAudience: [
+      'Architects creating monograph portfolios for competition submissions or academic monographs',
+      'Boutique interior practices documenting completed commissions for high-net-worth clients',
+      'Graduating design students preparing distinguished applications for international fellowships',
+    ],
+    howToUse: [
+      {
+        step: '01',
+        title: 'Open in InDesign or Figma',
+        description: 'Choose your preferred working environment. All master styles, baseline grids, and paragraph styles are mapped identically.',
+      },
+      {
+        step: '02',
+        title: 'Insert Project Imagery & Drawings',
+        description: 'Drop your photographs, CAD plans, and sections into pre-proportioned image containers.',
+      },
+      {
+        step: '03',
+        title: 'Export Print & Screen Editions',
+        description: 'Use the pre-configured joboptions file to generate press-ready CMYK PDFs or an interactive screen PDF.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Are the fonts included in the download?',
+        answer: 'We utilize Google Fonts (Cormorant Garamond & Plus Jakarta Sans) which are 100% free for commercial use. Download links and pairing guides are included.',
+      },
+      {
+        question: 'Can I add or delete pages without breaking the grid?',
+        answer: 'Yes. Every page is mapped to a master parent spread. Duplicating or removing spreads maintains uninterrupted automatic page numbering.',
+      },
+    ],
     headline: '48-page editorial monograph template with rigorous typographic grids',
     description: 'A refined, publication-grade architectural monograph template.',
     priceInr: 8990,
@@ -167,6 +251,41 @@ export const PRODUCTS: DigitalProduct[] = [
     tags: ['competition', 'boards', 'a0', 'presentation', 'diagrams'],
     fileSize: '490 MB',
     lastUpdated: 'August 2025',
+    deliverableType: 'Competition & Scope Presentation System',
+    pageCount: '8 Modular A0/A1 Layouts + Scope Key',
+    highlights: [
+      'Modular ISO A0 & A1 sheets with architectural title blocks and section guidelines',
+      'Axonometric exploded projection guides and environmental analysis vector symbols',
+      'Includes The Ultimate Scope Sheet™ summary checklist for deliverables verification',
+      'Pre-configured for Adobe InDesign, Illustrator, and Figma collaboration',
+    ],
+    targetAudience: [
+      'Architects entering international design competitions and RFP qualification stages',
+      'Design firms presenting schematic proposals to municipal boards and master clients',
+    ],
+    howToUse: [
+      {
+        step: '01',
+        title: 'Choose Sheet Orientation',
+        description: 'Select ISO A0 vertical, A0 horizontal, or multi-panel A1 configurations.',
+      },
+      {
+        step: '02',
+        title: 'Place Drawings & Diagrams',
+        description: 'Snap your vector line-drawings and renders into the geometric visual hierarchy zones.',
+      },
+      {
+        step: '03',
+        title: 'Apply Graphic Scales & Keys',
+        description: 'Use the pre-drawn North arrows, graphic scale bars, and technical annotation callouts.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Are vector architectural symbols included?',
+        answer: 'Yes, over 80 clean vector symbols (trees, scales, North arrows, and diagram arrows) are included as AI and SVG files.',
+      },
+    ],
     headline: 'Modular ISO A0 & A1 competition sheet layout system',
     description: 'Engineered specifically for high-stakes architectural competitions.',
     priceInr: 6490,
@@ -215,9 +334,44 @@ export const PRODUCTS: DigitalProduct[] = [
     licenseType: 'commercial',
     licenseSummary: 'Commercial Practice License: Integrate into unlimited live architectural construction sets and office standards.',
     featured: true,
-    tags: ['cad', 'bim', 'dwg', 'revit', 'joinery', 'details'],
+    tags: ['cad', 'bim', 'revit', 'joinery', 'details'],
     fileSize: '820 MB',
-    lastUpdated: 'November 2025',
+    lastUpdated: 'September 2025',
+    deliverableType: 'Parametric BIM & CAD Library',
+    pageCount: '120 Parametric Blocks & Schedules',
+    highlights: [
+      '120 parametric 2D/3D DWG and Revit family blocks for millwork, doors, and curtain walls',
+      'Complete Bill of Quantities (BOQ) schedule schema with material parameter bindings',
+      'Detail drawings tested across actual Scandinavian residential commissions',
+      'Compatible with AutoCAD, Revit 2022+, Rhino 8, and Vectorworks',
+    ],
+    targetAudience: [
+      'Architects and structural detailers producing contractor-ready tender drawing sets',
+      'Interior contractors and millwork fabricators building custom architectural casework',
+    ],
+    howToUse: [
+      {
+        step: '01',
+        title: 'Load into Revit or Insert DWG',
+        description: 'Drag the .rvt library into your Revit project browser or x-ref the DWG detail blocks.',
+      },
+      {
+        step: '02',
+        title: 'Adjust Parametric Dimensions',
+        description: 'Edit wall cavity depths, shadowline widths (5mm to 25mm), and cladding thicknesses.',
+      },
+      {
+        step: '03',
+        title: 'Generate Instant Schedules',
+        description: 'Extract quantities directly into your construction schedule or tender spreadsheet.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Are these details compliant with international building codes?',
+        answer: 'Yes, dimensions and thermal breaks conform with standard international architectural and Passivhaus thermal bridge guidelines.',
+      },
+    ],
     headline: '120 precision 2D and 3D architectural construction detail blocks',
     description: 'A master library of technical construction details.',
     priceInr: 9990,
@@ -431,6 +585,46 @@ export const PRODUCTS: DigitalProduct[] = [
     tags: ['bundle', 'complete', 'monograph', 'cad', 'blender', 'pbr'],
     fileSize: '11.4 GB (5 volumes)',
     lastUpdated: 'November 2025',
+    deliverableType: 'Comprehensive Studio Master Archive',
+    pageCount: '5 Master Volumes (6 Toolkits + Scope Sheets)',
+    highlights: [
+      'Complete digital archive combining all 7 studio resources + exclusive Master Scope & BOQ Suite',
+      'Over 11.4 GB of production-tested architectural assets, templates, and 3D scenes',
+      'Includes Extended Studio Enterprise License covering entire firm and unlimited client projects',
+      'Lifetime free volume updates and priority access to future Tangent Studio releases',
+    ],
+    targetAudience: [
+      'Architectural practices establishing firm-wide presentation and documentation standards',
+      'Lead designers seeking an end-to-end asset library from concept boards to tender drawings',
+      'Visualization studios requiring a permanent library of 8K textures, skies, and 3D scenes',
+    ],
+    howToUse: [
+      {
+        step: '01',
+        title: 'Centralize on Studio Server',
+        description: 'Unpack the 5 volumes onto your studio cloud or local NAS. Enterprise license permits multi-seat access.',
+      },
+      {
+        step: '02',
+        title: 'Deploy to Project Teams',
+        description: 'Distribute templates to project architects, interior teams, and 3D visualization staff.',
+      },
+      {
+        step: '03',
+        title: 'Receive Ongoing Revisions',
+        description: 'Your license key provides permanent access to all newly added modules, detail updates, and scene upgrades.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How many team members can use this bundle under the Extended License?',
+        answer: 'There is zero seat cap. Your entire registered studio office or design department is fully covered.',
+      },
+      {
+        question: 'Are future volumes included?',
+        answer: 'Yes, Master Bundle patrons receive free incremental volume updates and new joinery packs.',
+      },
+    ],
     headline: 'The definitive Tangent Studio digital toolkit across 5 curated volumes',
     description: 'An all-encompassing suite combining our six most essential digital architectural resources.',
     priceInr: 24990,

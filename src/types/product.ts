@@ -66,6 +66,31 @@ export interface ProductPreviewMedia {
   type: 'image' | 'video'
 }
 
+export interface ProductReview {
+  id: string
+  productId: string
+  authorName: string
+  authorRole?: string
+  authorLocation?: string
+  rating: number // 1 to 5
+  title: string
+  content: string
+  createdAt: string
+  verifiedPurchase: boolean
+  moderationStatus: 'approved' | 'pending' | 'flagged'
+}
+
+export interface ProductFaq {
+  question: string
+  answer: string
+}
+
+export interface ProductWorkflowStep {
+  step: string
+  title: string
+  description: string
+}
+
 export interface DigitalProduct {
   id: string
   slug: string
@@ -86,6 +111,15 @@ export interface DigitalProduct {
   tags?: string[]
   fileSize?: string
   lastUpdated?: string
+
+  // Rich architectural product enhancements
+  deliverableType?: string
+  pageCount?: string
+  highlights?: string[]
+  targetAudience?: string[]
+  howToUse?: ProductWorkflowStep[]
+  faqs?: ProductFaq[]
+  reviewsList?: ProductReview[]
 
   // Compatibility aliases for existing UI and cart code
   title: string

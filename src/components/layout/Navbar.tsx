@@ -81,17 +81,46 @@ export function Navbar() {
     }
   }, [mobileMenuOpen])
 
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  // Track window scroll for transparent-to-solid navbar transition
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // On homepage at the top, blend with the cinematic dark hero
+  const isOverDarkHero = location.pathname === '/' && !isScrolled
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#E9E5DC]/80 bg-[#F6F4EF]/90 backdrop-blur-md transition-colors">
+    <header
+      className={cn(
+        'sticky top-0 z-50 w-full transition-all duration-300',
+        isOverDarkHero
+          ? 'bg-[#151614]/85 text-white border-b border-white/10 backdrop-blur-md shadow-lg'
+          : 'bg-[#F6F4EF]/95 text-[#20211E] border-b border-[#E9E5DC]/80 backdrop-blur-md shadow-editorial',
+      )}
+    >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
         {/* Editable studio logo / wordmark */}
         <Link
           to="/"
-          className="font-serif text-2xl tracking-tight text-[#20211E] hover:text-[#777B60] transition-colors flex items-baseline gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E] rounded-sm py-1"
+          className={cn(
+            'font-serif text-2xl tracking-tight transition-colors flex items-baseline gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E] rounded-sm py-1',
+            isOverDarkHero ? 'text-white hover:text-[#D3CDC0]' : 'text-[#20211E] hover:text-[#777B60]',
+          )}
           aria-label="Tangent Studio Home"
         >
           <span className="font-normal">Tangent</span>
-          <span className="font-sans text-[11px] tracking-[0.22em] uppercase text-[#797C72] font-medium">
+          <span
+            className={cn(
+              'font-sans text-[11px] tracking-[0.22em] uppercase font-medium',
+              isOverDarkHero ? 'text-[#D3CDC0]' : 'text-[#797C72]',
+            )}
+          >
             Studio
           </span>
         </Link>
@@ -105,10 +134,14 @@ export function Navbar() {
               end={link.path === '/'}
               className={({ isActive }) =>
                 cn(
-                  'font-sans text-xs uppercase tracking-[0.16em] transition-colors py-1 border-b border-transparent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#20211E] rounded-sm',
-                  isActive
-                    ? 'text-[#20211E] border-[#20211E] font-medium'
-                    : 'text-[#53554D] hover:text-[#20211E]',
+                  'font-sans text-xs uppercase tracking-[0.16em] transition-colors py-1 border-b focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-current rounded-sm',
+                  isOverDarkHero
+                    ? isActive
+                      ? 'text-white border-white font-medium'
+                      : 'text-[#D3CDC0]/80 hover:text-white border-transparent'
+                    : isActive
+                      ? 'text-[#20211E] border-[#20211E] font-medium'
+                      : 'text-[#53554D] hover:text-[#20211E] border-transparent',
                 )
               }
             >
@@ -122,11 +155,23 @@ export function Navbar() {
           <Link
             to="/cart"
             aria-label={`Shopping bag with ${summary.itemCount} items`}
-            className="relative p-2.5 text-[#20211E] hover:text-[#777B60] transition-colors rounded-md hover:bg-[#E9E5DC]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E]"
+            className={cn(
+              'relative p-2.5 transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2',
+              isOverDarkHero
+                ? 'text-white hover:bg-white/10 focus-visible:ring-white'
+                : 'text-[#20211E] hover:text-[#777B60] hover:bg-[#E9E5DC]/50 focus-visible:ring-[#20211E]',
+            )}
           >
             <ShoppingBag className="w-5 h-5" />
             {summary.itemCount > 0 && (
-              <span className="absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#20211E] px-1 text-[10px] font-bold text-[#F6F4EF] font-mono">
+              <span
+                className={cn(
+                  'absolute top-1 right-1 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-bold font-mono',
+                  isOverDarkHero
+                    ? 'bg-white text-[#20211E]'
+                    : 'bg-[#20211E] text-[#F6F4EF]',
+                )}
+              >
                 {summary.itemCount}
               </span>
             )}
@@ -135,7 +180,12 @@ export function Navbar() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="md:hidden p-2.5 text-[#20211E] hover:text-[#777B60] rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E]"
+            className={cn(
+              'md:hidden p-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2',
+              isOverDarkHero
+                ? 'text-white hover:bg-white/10 focus-visible:ring-white'
+                : 'text-[#20211E] hover:text-[#777B60] focus-visible:ring-[#20211E]',
+            )}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
