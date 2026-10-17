@@ -1,14 +1,21 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { motion, AnimatePresence } from 'motion/react'
 import { Search, X, SlidersHorizontal, Sparkles, ShieldCheck, Download, Layers } from 'lucide-react'
 import {
   Container,
-  PageHeading,
   Breadcrumbs,
   Button,
   EmptyState,
   ProductCard,
 } from '@/components/ui'
+import {
+  ScrollReveal,
+  MaskedText,
+  StaggerGroup,
+  StaggerItem,
+  CardHover,
+} from '@/components/motion'
 import {
   MARKETPLACE_CATEGORIES,
   type MarketplaceCategory,
@@ -76,59 +83,81 @@ export function ShopPage() {
 
   return (
     <div className="py-10 space-y-16">
-      {/* Editorial Header */}
+      {/* Editorial Header with Masked Typography */}
       <Container>
-        <PageHeading
-          breadcrumbs={
-            <Breadcrumbs
-              items={[
-                { label: 'Studio Home', to: '/' },
-                { label: 'Digital Marketplace' },
-              ]}
-            />
-          }
-          title="Digital Tools &amp; Spatial Resources"
-          subtitle="Production-grade CAD libraries, tactile material scans, editorial monograph templates, and calibrated 3D visualization scenes crafted by Tangent Studio architects."
-        />
-
-        {/* Catalog Assurance Strip */}
-        <div className="mt-8 pt-6 border-t border-[#E9E5DC] flex flex-wrap items-center justify-between gap-4 text-xs font-mono uppercase tracking-wider text-[#777B60]">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#777B60]" />
-            <span>Architecture Practice Standard • All Prices in INR (₹)</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <span>Demo Catalog • 8 Curated Assets</span>
-            <span>Commercial License Included</span>
-            <span>Instant Zip Delivery</span>
+        <div className="space-y-6">
+          <Breadcrumbs
+            items={[
+              { label: 'Studio Home', to: '/' },
+              { label: 'Digital Marketplace' },
+            ]}
+          />
+          <div className="space-y-4 max-w-4xl text-left">
+            <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#777B60] block">
+              Architectural Assets &amp; Specifications
+            </span>
+            <MaskedText
+              as="h1"
+              className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#20211E] leading-[1.05]"
+            >
+              Digital Tools &amp; Spatial Resources
+            </MaskedText>
+            <ScrollReveal delay={0.15}>
+              <p className="font-sans text-lg sm:text-xl text-[#53554D] font-light leading-relaxed max-w-3xl">
+                Production-grade CAD libraries, tactile material scans, editorial monograph templates,
+                and calibrated 3D visualization scenes crafted by Tangent Studio architects.
+              </p>
+            </ScrollReveal>
           </div>
         </div>
+
+        {/* Catalog Assurance Strip */}
+        <ScrollReveal delay={0.25}>
+          <div className="mt-8 pt-6 border-t border-[#E9E5DC] flex flex-wrap items-center justify-between gap-4 text-xs font-mono uppercase tracking-wider text-[#777B60]">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#777B60]" />
+              <span>Architecture Practice Standard • All Prices in INR (₹)</span>
+            </div>
+            <div className="flex items-center gap-6">
+              <span>Demo Catalog • {PRODUCTS.length} Curated Assets</span>
+              <span>Commercial License Included</span>
+              <span>Instant Zip Delivery</span>
+            </div>
+          </div>
+        </ScrollReveal>
       </Container>
 
       {/* Featured Collection Highlight (Shown when not filtering) */}
       {!isFiltered && (
         <section className="bg-[#EFECE6]/50 py-12 border-y border-[#E9E5DC]">
           <Container>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-              <div>
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Curated Selection</span>
+            <ScrollReveal>
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 text-left">
+                <div>
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Curated Selection</span>
+                  </div>
+                  <h2 className="font-serif text-2xl md:text-3xl text-[#20211E]">
+                    Featured Studio Releases
+                  </h2>
                 </div>
-                <h2 className="font-serif text-2xl md:text-3xl text-[#20211E]">
-                  Featured Studio Releases
-                </h2>
+                <p className="text-xs font-mono uppercase tracking-widest text-[#777B60]">
+                  {featuredProducts.length} Selected Artifacts
+                </p>
               </div>
-              <p className="text-xs font-mono uppercase tracking-widest text-[#777B60]">
-                {featuredProducts.length} Selected Artifacts
-              </p>
-            </div>
+            </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StaggerGroup
+              stagger={0.08}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            >
               {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <StaggerItem key={`featured-${product.id}`} className="h-full">
+                  <ProductCard product={product} />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGroup>
           </Container>
         </section>
       )}
@@ -152,7 +181,7 @@ export function ShopPage() {
                 placeholder="Search templates, CAD details, Blender scenes, tags..."
                 value={searchQuery}
                 onChange={(e) => updateFilters({ search: e.target.value })}
-                className="w-full pl-10 pr-9 py-2.5 text-sm bg-white border border-[#E9E5DC] rounded-none focus:outline-none focus:border-[#20211E] transition-colors placeholder:text-[#53554D]/60 text-[#20211E]"
+                className="w-full pl-10 pr-9 py-2.5 text-sm bg-white border border-[#E9E5DC] rounded-lg focus:outline-none focus:border-[#20211E] focus:ring-1 focus:ring-[#20211E] transition-all placeholder:text-[#53554D]/60 text-[#20211E]"
               />
               {searchQuery && (
                 <button
@@ -179,7 +208,7 @@ export function ShopPage() {
                 id="marketplace-sort"
                 value={sortBy}
                 onChange={(e) => updateFilters({ sort: e.target.value as SortOption })}
-                className="bg-white border border-[#E9E5DC] text-xs font-sans text-[#20211E] py-2.5 px-3 focus:outline-none focus:border-[#20211E] transition-colors cursor-pointer"
+                className="bg-white border border-[#E9E5DC] rounded-lg text-xs font-sans text-[#20211E] py-2.5 px-3 focus:outline-none focus:border-[#20211E] focus:ring-1 focus:ring-[#20211E] transition-all cursor-pointer"
               >
                 <option value="featured">Featured First</option>
                 <option value="price-low-to-high">Price: Low to High</option>
@@ -190,7 +219,7 @@ export function ShopPage() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="space-y-2">
+          <div className="space-y-2 text-left">
             <div className="text-xs font-mono uppercase tracking-widest text-[#777B60]">
               Filter By Discipline
             </div>
@@ -203,14 +232,14 @@ export function ShopPage() {
                 role="tab"
                 aria-selected={category === 'all'}
                 onClick={() => updateFilters({ category: 'all' })}
-                className={`text-xs px-3.5 py-1.5 transition-all uppercase tracking-wider font-mono flex items-center gap-2 border ${
+                className={`text-xs px-3.5 py-1.5 rounded-full transition-all uppercase tracking-wider font-mono flex items-center gap-2 border cursor-pointer ${
                   category === 'all'
-                    ? 'bg-[#20211E] text-white border-[#20211E]'
+                    ? 'bg-[#20211E] text-white border-[#20211E] shadow-xs'
                     : 'bg-white text-[#53554D] border-[#E9E5DC] hover:border-[#777B60] hover:text-[#20211E]'
                 }`}
               >
                 <span>All Resources</span>
-                <span className={`text-[10px] px-1 py-0.2 rounded-full ${
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
                   category === 'all' ? 'bg-[#3A3B36] text-[#E9E5DC]' : 'bg-[#EFECE6] text-[#777B60]'
                 }`}>
                   {categoryCounts['all']}
@@ -226,9 +255,9 @@ export function ShopPage() {
                     role="tab"
                     aria-selected={isSelected}
                     onClick={() => updateFilters({ category: cat.id })}
-                    className={`text-xs px-3.5 py-1.5 transition-all uppercase tracking-wider font-mono flex items-center gap-2 border ${
+                    className={`text-xs px-3.5 py-1.5 rounded-full transition-all uppercase tracking-wider font-mono flex items-center gap-2 border cursor-pointer ${
                       isSelected
-                        ? 'bg-[#20211E] text-white border-[#20211E]'
+                        ? 'bg-[#20211E] text-white border-[#20211E] shadow-xs'
                         : 'bg-white text-[#53554D] border-[#E9E5DC] hover:border-[#777B60] hover:text-[#20211E]'
                     }`}
                   >
@@ -257,7 +286,7 @@ export function ShopPage() {
                 variant="ghost"
                 size="sm"
                 onClick={handleResetFilters}
-                className="text-xs text-[#777B60] hover:text-[#20211E] h-auto py-1 px-2 gap-1.5"
+                className="text-xs text-[#777B60] hover:text-[#20211E] h-auto py-1 px-2 gap-1.5 cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
                 Reset filters
@@ -266,14 +295,29 @@ export function ShopPage() {
           </div>
         </div>
 
-        {/* Product Grid or Empty State */}
+        {/* Product Grid with Animated Enter/Exit and Layout Transitions */}
         <div className="mt-8">
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredProducts.map((product) => (
+                  <motion.div
+                    key={product.id}
+                    layout
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="h-full"
+                  >
+                    <ProductCard product={product} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           ) : (
             <EmptyState
               icon={<Search className="w-5 h-5" />}
@@ -292,54 +336,68 @@ export function ShopPage() {
       {/* Studio Quality Assurance Section */}
       <section className="border-t border-[#E9E5DC] bg-[#FCFAF6] py-16">
         <Container>
-          <div className="max-w-2xl mb-12">
-            <div className="text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
-              Studio Standards
+          <ScrollReveal>
+            <div className="max-w-2xl mb-12 text-left">
+              <div className="text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
+                Studio Standards
+              </div>
+              <h2 className="font-serif text-2xl md:text-3xl text-[#20211E]">
+                Built by practicing architects for professional production
+              </h2>
+              <p className="mt-3 text-sm text-[#53554D] leading-relaxed font-light">
+                Every digital resource in our catalog has been developed for and vetted on live residential, interior, and civic commissions before public release.
+              </p>
             </div>
-            <h2 className="font-serif text-2xl md:text-3xl text-[#20211E]">
-              Built by practicing architects for professional production
-            </h2>
-            <p className="mt-3 text-sm text-[#53554D] leading-relaxed">
-              Every digital resource in our catalog has been developed for and vetted on live residential, interior, and civic commissions before public release.
-            </p>
-          </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 border border-[#E9E5DC] bg-white space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#20211E]">
-                <Layers className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg text-[#20211E]">
-                Rigorous Tectonic Precision
-              </h3>
-              <p className="text-xs text-[#53554D] leading-relaxed">
-                Millimeter-accurate geometries, standardized layer hierarchies, and clean non-destructive component structures ready for client delivery.
-              </p>
-            </div>
+            <ScrollReveal delay={0.05}>
+              <CardHover lift={3} className="h-full">
+                <div className="p-6 border border-[#E9E5DC] bg-white rounded-lg space-y-3 text-left h-full">
+                  <div className="w-10 h-10 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#20211E]">
+                    <Layers className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif text-lg text-[#20211E]">
+                    Rigorous Tectonic Precision
+                  </h3>
+                  <p className="text-xs text-[#53554D] leading-relaxed font-light">
+                    Millimeter-accurate geometries, standardized layer hierarchies, and clean non-destructive component structures ready for client delivery.
+                  </p>
+                </div>
+              </CardHover>
+            </ScrollReveal>
 
-            <div className="p-6 border border-[#E9E5DC] bg-white space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#20211E]">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg text-[#20211E]">
-                Perpetual Studio License
-              </h3>
-              <p className="text-xs text-[#53554D] leading-relaxed">
-                Unrestricted commercial use across unlimited client presentations, competition monographs, and published renderings. No recurrent subscription fees.
-              </p>
-            </div>
+            <ScrollReveal delay={0.12}>
+              <CardHover lift={3} className="h-full">
+                <div className="p-6 border border-[#E9E5DC] bg-white rounded-lg space-y-3 text-left h-full">
+                  <div className="w-10 h-10 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#20211E]">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif text-lg text-[#20211E]">
+                    Perpetual Studio License
+                  </h3>
+                  <p className="text-xs text-[#53554D] leading-relaxed font-light">
+                    Unrestricted commercial use across unlimited client presentations, competition monographs, and published renderings. No recurrent subscription fees.
+                  </p>
+                </div>
+              </CardHover>
+            </ScrollReveal>
 
-            <div className="p-6 border border-[#E9E5DC] bg-white space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#20211E]">
-                <Download className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg text-[#20211E]">
-                Direct Source Files
-              </h3>
-              <p className="text-xs text-[#53554D] leading-relaxed">
-                Immediate access to cleanly packaged uncompressed source archives (.blend, .dwg, .idml, .fig, .rvt) with verified texture maps and palettes.
-              </p>
-            </div>
+            <ScrollReveal delay={0.18}>
+              <CardHover lift={3} className="h-full">
+                <div className="p-6 border border-[#E9E5DC] bg-white rounded-lg space-y-3 text-left h-full">
+                  <div className="w-10 h-10 rounded-full bg-[#EFECE6] flex items-center justify-center text-[#20211E]">
+                    <Download className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif text-lg text-[#20211E]">
+                    Direct Source Files
+                  </h3>
+                  <p className="text-xs text-[#53554D] leading-relaxed font-light">
+                    Immediate access to cleanly packaged uncompressed source archives (.blend, .dwg, .idml, .fig, .rvt) with verified texture maps and palettes.
+                  </p>
+                </div>
+              </CardHover>
+            </ScrollReveal>
           </div>
         </Container>
       </section>

@@ -105,3 +105,25 @@ When implementing features in future phases:
    `<PageTransition>` is already globally bound in `RootLayout.tsx`. Ensure all new pages export clean, accessible semantic structures.
 6. **For GSAP / ScrollTrigger Sequences**:
    Always use the `useGSAPContext(callback, deps, scopeRef)` hook from `@/lib/gsapConfig` to guarantee that triggers are safely garbage collected and reverted upon route changes.
+
+---
+
+## 6. Phase 4 Implementation Reference: Digital-Product Store
+
+### 6.1 Product Catalogue (`/shop`)
+- **Editorial Typography**: Headings reveal with `MaskedText` and fluid cubic bezier easing.
+- **Natural Stagger**: Product cards render in rhythmic cadence with `StaggerGroup` and `StaggerItem`.
+- **Zero-Flicker Layout Transitions**: Dynamic category pill switching and search input reflow use Framer Motion's `layout` and `<AnimatePresence mode="popLayout">` to eliminate abrupt jumps.
+- **Refined Card Mockups**: `ProductCard` integrates `CardHover` (subtle 3px elevation + border highlight), format badge pills, and instant reactive quick-add state with animated confirmation.
+
+### 6.2 Product Detail Page (`/shop/:slug`)
+- **Coordinated Entrance**: Editorial title with `MaskedText`, metadata specs, and purchase panel animate in sequential harmony.
+- **Interactive Preview Gallery**: Thumbnail switcher crossfades active imagery with smooth transitions, plus accessible fullscreen lightbox overlay.
+- **Collapsible FAQ Accordion**: Animated height expansion using `AnimatePresence` with complete keyboard accessibility.
+- **Sticky Purchase Bar**: Automatically slides into view on desktop and mobile when the primary hero CTA scrolls out of the viewport.
+
+### 6.3 Cart & Checkout Experience (`/cart`, `/checkout`, `/checkout/confirmation`)
+- **Interactive Bag (`/cart`)**: Item additions and removals animate with `AnimatePresence mode="popLayout"`, maintaining focus and updating authoritative INR subtotal calculations instantly.
+- **Truthful Demo Checkout (`/checkout`)**: Subtle inline error validation animations, loading state with spinning SVG indicator, and clear disclaimer that this is a simulated design demonstration (no real card data or payment).
+- **Celebratory Confirmation (`/checkout/confirmation`)**: Masked title reveal, animated order reference banner, simulated license key display, and simulated asset package download trigger.
+
