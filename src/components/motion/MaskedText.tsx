@@ -1,49 +1,84 @@
-import { motion, useInView } from 'motion/react'
-import { useRef } from 'react'
+import { motion, useInView, useReducedMotion } from 'motion/react'
+import { useRef, type ElementType } from 'react'
+import { MOTION_DURATIONS, MOTION_EASINGS } from '@/lib/motionTokens'
 
-interface MaskedTextProps {
+export interface MaskedTextProps {
   children: string
   className?: string
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div'
+  as?: ElementType
   delay?: number
   duration?: number
+  splitBy?: 'line' | 'word'
+  once?: boolean
 }
 
 /**
- * Editorial masked text reveal where text slides up smoothly from behind an overflow-hidden clipping mask.
- * Respects prefers-reduced-motion automatically through standard motion rules.
+ * Editorial masked text reveal where text rises through an overflow-hidden clipping window.
+ * Preserves typography metrics and respects prefers-reduced-motion automatically.
  */
 export function MaskedText({
   children,
   className = '',
   as: Component = 'div',
   delay = 0,
-  duration = 0.85,
+  duration = MOTION_DURATIONS.reveal,
+  splitBy = 'line',
+  once = true,
 }: MaskedTextProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
+  const isInView = useInView(ref, { once, margin: '-8% 0px' })
+  const prefersReduced = useReducedMotion()
 
-  // Split lines if text contains explicit newlines, or split into sentences/words if needed
-  const lines = children.split('\n').filter(Boolean)
+  // If reduced motion is preferred, render clean un-animated typography
+  if (prefersReduced) {
+    return <Component className={className}>{children}</Component>
+  }
+
+  // Segment by explicit lines or word sequences
+  const segments =
+    splitBy === 'line'
+      ? children.split('\n').filter(Boolean)
+      : children.split(' ').filter(Boolean)
 
   return (
     <Component ref={ref} className={className}>
-      {lines.map((line, index) => (
-        <span key={index} className="block overflow-hidden py-1">
-          <motion.span
-            className="block"
-            initial={{ y: '115%', opacity: 0.1, rotateX: 6 }}
-            animate={isInView ? { y: '0%', opacity: 1, rotateX: 0 } : {}}
-            transition={{
-              duration,
-              delay: delay + index * 0.14,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {line}
-          </motion.span>
+      {splitBy === 'line' ? (
+        segments.map((line, index) => (
+          <span key={index} className="block overflow-hidden py-0.5">
+            <motion.span
+              className="block will-change-transform"
+              initial={{ y: '110%', opacity: 0.2 }}
+              animate={isInView ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0.2 }}
+              transition={{
+                duration,
+                delay: delay + index * 0.12,
+                ease: MOTION_EASINGS.cinematic,
+              }}
+            >
+              {line}
+            </motion.span>
+          </span>
+        ))
+      ) : (
+        <span className="inline-flex flex-wrap gap-x-[0.28em]">
+          {segments.map((word, index) => (
+            <span key={index} className="inline-block overflow-hidden py-0.5">
+              <motion.span
+                className="inline-block will-change-transform"
+                initial={{ y: '110%', opacity: 0.2 }}
+                animate={isInView ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0.2 }}
+                transition={{
+                  duration: duration * 0.85,
+                  delay: delay + index * 0.035,
+                  ease: MOTION_EASINGS.cinematic,
+                }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
         </span>
-      ))}
+      )}
     </Component>
   )
 }

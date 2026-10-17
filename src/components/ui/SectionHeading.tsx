@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { ScrollReveal } from '@/components/motion'
 
 export interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
   eyebrow?: string
@@ -20,7 +21,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   if (align === 'split') {
     return (
-      <div
+      <ScrollReveal
         className={cn(
           'flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#E9E5DC]',
           className,
@@ -43,12 +44,12 @@ export function SectionHeading({
           )}
         </div>
         {action && <div className="shrink-0">{action}</div>}
-      </div>
+      </ScrollReveal>
     )
   }
 
   return (
-    <div
+    <ScrollReveal
       className={cn(
         'space-y-3 pb-8 border-b border-[#E9E5DC]',
         align === 'center' && 'text-center mx-auto max-w-3xl',
@@ -71,6 +72,6 @@ export function SectionHeading({
         </p>
       )}
       {action && <div className="pt-2">{action}</div>}
-    </div>
+    </ScrollReveal>
   )
 }

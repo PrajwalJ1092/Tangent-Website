@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { CartProvider } from '@/context'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
+import { PageTransition } from '@/components/motion'
 
 export function RootLayout() {
   return (
@@ -16,7 +17,9 @@ export function RootLayout() {
         </a>
         <Navbar />
         <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col focus:outline-none">
-          <Outlet />
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
         </main>
         <Footer />
       </div>

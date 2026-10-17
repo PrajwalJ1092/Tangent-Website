@@ -4,6 +4,7 @@ import type { Project } from '@/types/project'
 import { ImageFrame } from './ImageFrame'
 import { formatCategoryLabel } from '@/lib/formatters'
 import { cn } from '@/lib/utils'
+import { CardHover } from '@/components/motion'
 
 export interface ProjectCardProps {
   project: Project
@@ -19,7 +20,8 @@ export function ProjectCard({
   priority = false,
 }: ProjectCardProps) {
   return (
-    <article className={cn('group flex flex-col gap-4 text-left', className)}>
+    <CardHover lift={3} className={cn('group flex flex-col gap-4 text-left', className)}>
+      <article className="flex flex-col gap-4 text-left w-full">
       <Link
         to={`/projects/${project.slug}`}
         className="block overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E] rounded-md"
@@ -65,6 +67,7 @@ export function ProjectCard({
           </p>
         )}
       </div>
-    </article>
+      </article>
+    </CardHover>
   )
 }

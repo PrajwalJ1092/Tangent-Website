@@ -12,6 +12,7 @@ import {
 } from '@/lib/formatters'
 import { useCart } from '@/context'
 import { cn } from '@/lib/utils'
+import { CardHover } from '@/components/motion'
 
 export interface ProductCardProps {
   product: DigitalProduct
@@ -37,12 +38,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
   )
 
   return (
-    <article
-      className={cn(
-        'group flex flex-col justify-between bg-white rounded-lg border border-[#E9E5DC] p-4 transition-all duration-300 hover:border-[#D3CDC0] hover:shadow-[0_8px_24px_-4px_rgba(32,33,30,0.06)] text-left',
-        className,
-      )}
-    >
+    <CardHover lift={3} className={cn('h-full', className)}>
+      <article
+        className="group flex flex-col justify-between h-full bg-white rounded-lg border border-[#E9E5DC] p-4 transition-all duration-300 hover:border-[#D3CDC0] hover:shadow-[0_8px_24px_-4px_rgba(32,33,30,0.06)] text-left"
+      >
       <div className="space-y-4">
         {/* Thumbnail link with tag badges */}
         <div className="relative">
@@ -152,6 +151,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
           </Button>
         </div>
       </div>
-    </article>
+      </article>
+    </CardHover>
   )
 }
