@@ -29,7 +29,7 @@ export function ScrollReveal({
   variant = 'fade-up',
   delay = 0,
   duration,
-  margin = '-8% 0px',
+  margin = '0px 0px -40px 0px',
   once = true,
   as: Component = 'div',
 }: ScrollRevealProps) {

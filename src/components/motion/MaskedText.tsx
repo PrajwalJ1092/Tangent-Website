@@ -26,7 +26,7 @@ export function MaskedText({
   once = true,
 }: MaskedTextProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once, margin: '-8% 0px' })
+  const isInView = useInView(ref, { once, margin: '0px 0px -30px 0px' })
   const prefersReduced = useReducedMotion()
 
   // If reduced motion is preferred, render clean un-animated typography
