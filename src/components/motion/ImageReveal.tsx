@@ -11,7 +11,7 @@ export interface ImageRevealProps
   src: string
   alt: string
   aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide' | 'auto'
-  direction?: 'up' | 'down' | 'left' | 'right'
+  direction?: 'up' | 'down' | 'left' | 'right' | 'center'
   delay?: number
   duration?: number
   hoverZoom?: boolean
@@ -45,6 +45,10 @@ const clipDirections = {
     hidden: 'inset(0% 100% 0% 0%)',
     visible: 'inset(0% 0% 0% 0%)',
   },
+  center: {
+    hidden: 'inset(10% 10% 10% 10%)',
+    visible: 'inset(0% 0% 0% 0%)',
+  },
 }
 
 /**
@@ -70,7 +74,7 @@ export function ImageReveal({
   const prefersReduced = useReducedMotion()
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const clip = clipDirections[direction]
+  const clip = clipDirections[direction] || clipDirections.up
 
   return (
     <figure className={cn('group flex flex-col gap-2 w-full', containerClassName)}>

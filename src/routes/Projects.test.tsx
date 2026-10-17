@@ -110,4 +110,53 @@ describe('Portfolio & Projects Architecture', () => {
     expect(screen.getByText(/The architectural record corresponding to "invalid-non-existent-project"/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Return to Projects Archive/i })).toBeInTheDocument()
   })
+
+  it('switches between Grid view and interactive Monograph Index view', async () => {
+    renderRoute('/projects')
+
+    // Find view switcher buttons
+    const indexViewButton = screen.getByRole('button', { name: /Index view/i })
+    const gridViewButton = screen.getByRole('button', { name: /Grid view/i })
+
+    expect(gridViewButton).toHaveAttribute('aria-pressed', 'true')
+    expect(indexViewButton).toHaveAttribute('aria-pressed', 'false')
+
+    // Switch to index view
+    fireEvent.click(indexViewButton)
+    expect(indexViewButton).toHaveAttribute('aria-pressed', 'true')
+
+    // Should render the interactive index with numbered entries
+    expect(screen.getByText('01')).toBeInTheDocument()
+    expect(screen.getByText(/Open Case Study Monograph/i)).toBeInTheDocument()
+
+    // Switch back to grid view
+    fireEvent.click(gridViewButton)
+    expect(gridViewButton).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('opens accessible lightbox on plate interaction, navigates plates, and closes on Escape', async () => {
+    renderRoute('/projects/nordic-forest-pavilion')
+
+    // Click on the cover image plate button to open lightbox
+    const coverButton = screen.getByRole('button', { name: /Enlarge cover image/i })
+    fireEvent.click(coverButton)
+
+    // Lightbox modal dialog should be rendered
+    const dialog = await screen.findByRole('dialog', { name: /Image gallery lightbox/i })
+    expect(dialog).toBeInTheDocument()
+    expect(screen.getByText(/Plate 1 of 4/i)).toBeInTheDocument()
+
+    // Navigate to next image
+    const nextButton = screen.getByRole('button', { name: /Next image/i })
+    fireEvent.click(nextButton)
+    expect(screen.getByText(/Plate 2 of 4/i)).toBeInTheDocument()
+
+    // Press Escape to close
+    fireEvent.keyDown(window, { key: 'Escape' })
+
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog', { name: /Image gallery lightbox/i })).not.toBeInTheDocument()
+    })
+  })
 })
+
