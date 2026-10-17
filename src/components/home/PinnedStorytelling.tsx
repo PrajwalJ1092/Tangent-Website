@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react'
 import { ARCHITECTURAL_ASSETS } from '@/data/assets'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useIsMobile } from '@/lib/motionTokens'
 
 interface StoryChapter {
   step: string
@@ -73,21 +74,26 @@ const CHAPTERS: StoryChapter[] = [
 
 export function PinnedStorytelling() {
   const [activeIdx, setActiveIdx] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const isMobile = useIsMobile()
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // Auto-advance chapters smoothly unless user is hovering or interacting
-  useEffect(() => {
-    if (isPaused) return
+  // Desktop Pinned Scroll Tracking
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  })
 
-    timerRef.current = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % CHAPTERS.length)
-    }, 7000)
-
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
+  // Synchronize active chapter based on scroll progress on desktop
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (isMobile) return
+    if (latest < 0.35) {
+      setActiveIdx(0)
+    } else if (latest < 0.72) {
+      setActiveIdx(1)
+    } else {
+      setActiveIdx(2)
     }
-  }, [isPaused, activeIdx])
+  })
 
   const currentChapter = CHAPTERS[activeIdx]!
 
@@ -100,16 +106,26 @@ export function PinnedStorytelling() {
   }
 
   return (
-    <section
-      className="relative bg-[#1A1B18] text-[#F6F4EF] py-16 sm:py-24 border-y border-white/10 overflow-hidden"
+    <div
+      ref={containerRef}
+      className={
+        isMobile
+          ? 'relative bg-[#1A1B18] text-[#F6F4EF] py-16 border-y border-white/10'
+          : 'relative h-[220vh] bg-[#1A1B18] text-[#F6F4EF] border-y border-white/10'
+      }
       aria-label="Pinned Monograph Storytelling"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-10 sm:space-y-12">
+      {/* Sticky Stage on Desktop / Static on Mobile */}
+      <div
+        className={
+          isMobile
+            ? 'w-full flex flex-col justify-between px-6 sm:px-10 space-y-8'
+            : 'sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden px-6 sm:px-10 lg:px-16 py-8 md:py-12'
+        }
+      >
         {/* Top Header & Chapter Stepper */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-6">
-          <div className="space-y-2">
+        <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-5 z-20">
+          <div className="space-y-1">
             <div className="flex items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-[#777B60] animate-pulse" />
               <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#777B60]">
@@ -160,9 +176,9 @@ export function PinnedStorytelling() {
         </div>
 
         {/* Center Stage: Split Screen with Pinned Image Left & Evolving Narrative Right */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        <div className="max-w-7xl mx-auto w-full flex-1 grid lg:grid-cols-12 gap-8 lg:gap-14 items-center py-4 sm:py-6 z-10">
           {/* Left Column: Framed Image with Live Monograph View */}
-          <div className="lg:col-span-7 relative aspect-[16/11] sm:aspect-[16/10] lg:aspect-[16/10] rounded-sm overflow-hidden border border-white/10 bg-black/40 shadow-2xl">
+          <div className="lg:col-span-7 relative aspect-[16/11] sm:aspect-[16/10] lg:h-[480px] rounded-sm overflow-hidden border border-white/10 bg-black/40 shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentChapter.step}
@@ -220,7 +236,7 @@ export function PinnedStorytelling() {
           </div>
 
           {/* Right Column: Evolving Narrative & Specs */}
-          <div className="lg:col-span-5 relative min-h-[360px] flex items-center">
+          <div className="lg:col-span-5 relative min-h-[340px] flex items-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentChapter.step}
@@ -228,9 +244,9 @@ export function PinnedStorytelling() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="w-full space-y-6"
+                className="w-full space-y-5"
               >
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#777B60]">
                     Chapter {currentChapter.step} / {currentChapter.label}
                   </span>
@@ -247,9 +263,9 @@ export function PinnedStorytelling() {
                 </p>
 
                 {/* Technical Specs Table */}
-                <div className="grid grid-cols-1 gap-2 pt-2 border-t border-white/10 font-mono text-xs">
+                <div className="grid grid-cols-1 gap-1.5 pt-2 border-t border-white/10 font-mono text-xs">
                   {currentChapter.specs.map((s) => (
-                    <div key={s.label} className="flex justify-between py-1.5 border-b border-white/5">
+                    <div key={s.label} className="flex justify-between py-1 border-b border-white/5">
                       <span className="text-[#D3CDC0]/60">{s.label}</span>
                       <span className="text-white font-medium">{s.value}</span>
                     </div>
@@ -271,14 +287,18 @@ export function PinnedStorytelling() {
         </div>
 
         {/* Bottom Technical Status Bar */}
-        <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#D3CDC0]/60">
+        <div className="max-w-7xl mx-auto w-full pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#D3CDC0]/60">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#777B60]" />
-            <span>Interactive Monograph Analysis Active</span>
+            <span>
+              {isMobile ? 'Touch Chapter Selection' : 'Scroll Scrubbing & Pinned Stage Active'}
+            </span>
           </div>
-          <span className="hidden sm:inline">Select chapter tabs or hover to examine tectonic specifications</span>
+          <span className="hidden sm:inline">
+            Traverse scroll track or click chapter tabs to examine tectonic specifications
+          </span>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

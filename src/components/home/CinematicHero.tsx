@@ -76,18 +76,23 @@ export function CinematicHero() {
           className="space-y-6 sm:space-y-8"
         >
           {/* Studio Volume Monograph Badge */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/15 bg-black/40 backdrop-blur-md text-[11px] font-mono uppercase tracking-[0.2em] text-[#E9E5DC]">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/15 bg-black/40 backdrop-blur-md text-[11px] font-mono uppercase tracking-[0.2em] text-[#E9E5DC]"
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-[#777B60]" />
             <span>Monograph Vol. 04 / Architectural Commission &amp; Spatial Tectonics</span>
-          </div>
+          </motion.div>
 
           {/* Masked Monumental Headline */}
           <div className="space-y-2">
             <div className="overflow-hidden">
               <motion.h1
-                initial={{ y: '110%', opacity: 0 }}
+                initial={{ y: '115%', opacity: 0 }}
                 animate={{ y: '0%', opacity: 1 }}
-                transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
                 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-normal tracking-tight text-white leading-[0.98] text-balance"
               >
                 Formed by Light. Grounded in Matter.
@@ -98,33 +103,33 @@ export function CinematicHero() {
           {/* Editorial Philosophy Statement and Direct Actions */}
           <div className="grid md:grid-cols-12 gap-8 items-end pt-2 border-t border-white/15">
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.85, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="md:col-span-7 font-sans text-base sm:text-lg text-[#E9E5DC]/90 font-light leading-relaxed max-w-2xl"
             >
               Spaces shaped by light, material and intention. Tangent Studio bridges physical architecture and digital craft—constructing residential sanctuaries and producing rigorous design documentation tools.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="md:col-span-5 flex flex-wrap items-center gap-4 sm:justify-end"
             >
               <Link
                 to="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm bg-white text-[#20211E] font-mono text-xs uppercase tracking-[0.14em] font-medium hover:bg-[#E9E5DC] transition-all duration-300 shadow-floating"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-sm bg-white text-[#20211E] font-mono text-xs uppercase tracking-[0.14em] font-medium hover:bg-[#E9E5DC] transition-all duration-300 shadow-floating hover:-translate-y-0.5"
               >
                 <span>Explore Projects</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-sm bg-black/40 text-white border border-white/20 backdrop-blur-md font-mono text-xs uppercase tracking-[0.14em] hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-sm bg-black/40 text-white border border-white/20 backdrop-blur-md font-mono text-xs uppercase tracking-[0.14em] hover:bg-white/10 hover:border-white/40 transition-all duration-300 hover:-translate-y-0.5"
               >
                 <span>Discover the Shop</span>
-                <ArrowUpRight className="w-4 h-4 text-[#777B60]" />
+                <ArrowUpRight className="w-4 h-4 text-[#777B60] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </motion.div>
           </div>

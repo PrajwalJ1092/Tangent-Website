@@ -1,5 +1,6 @@
 import { Container } from '@/components/ui'
 import { Quote } from 'lucide-react'
+import { StaggerGroup, StaggerItem, CardHover, ScrollReveal } from '@/components/motion'
 
 interface PatronTestimonial {
   id: string
@@ -51,53 +52,56 @@ export function TestimonialsSection() {
       <Container>
         <div className="space-y-12">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E9E5DC] pb-6">
-            <div className="space-y-2">
-              <span className="font-mono text-xs uppercase tracking-[0.22em] text-[#777B60] block">
-                Patron &amp; Jury Dialogue
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#20211E] tracking-tight">
-                Reflections on Built Form
-              </h2>
+          <ScrollReveal variant="fade-up">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E9E5DC] pb-6">
+              <div className="space-y-2 text-left">
+                <span className="font-mono text-xs uppercase tracking-[0.22em] text-[#777B60] block">
+                  Patron &amp; Jury Dialogue
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#20211E] tracking-tight">
+                  Reflections on Built Form
+                </h2>
+              </div>
+              <div className="text-left sm:text-right">
+                <span className="text-[11px] font-mono text-[#797C72] uppercase tracking-wider block">
+                  * Development Fixtures (Client Endorsements)
+                </span>
+                <span className="text-xs text-[#53554D] font-sans">
+                  Verified Architectural Collaborations
+                </span>
+              </div>
             </div>
-            <div className="text-right">
-              <span className="text-[11px] font-mono text-[#797C72] uppercase tracking-wider block">
-                * Development Fixtures (Client Endorsements)
-              </span>
-              <span className="text-xs text-[#53554D] font-sans">
-                Verified Architectural Collaborations
-              </span>
-            </div>
-          </div>
+          </ScrollReveal>
 
-          {/* Testimonials 3-Column Editorial Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+          {/* Testimonials 3-Column Editorial Grid with Staggered Entrance */}
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {TESTIMONIAL_FIXTURES.map((item) => (
-              <article
-                key={item.id}
-                className="relative p-8 rounded-sm bg-white border border-[#E9E5DC] flex flex-col justify-between shadow-editorial hover:shadow-editorial-hover transition-all duration-300"
-              >
-                <div className="space-y-6">
-                  <Quote className="w-8 h-8 text-[#777B60]/40 stroke-1" />
-                  <p className="font-serif text-lg sm:text-xl text-[#20211E] leading-relaxed italic font-normal">
-                    &ldquo;{item.quote}&rdquo;
-                  </p>
-                </div>
+              <StaggerItem key={item.id} className="h-full">
+                <CardHover lift={4} className="h-full">
+                  <article className="relative h-full p-8 rounded-sm bg-white border border-[#E9E5DC] flex flex-col justify-between shadow-editorial hover:shadow-editorial-hover transition-all duration-300 text-left">
+                    <div className="space-y-6">
+                      <Quote className="w-8 h-8 text-[#777B60]/40 stroke-1" />
+                      <p className="font-serif text-lg sm:text-xl text-[#20211E] leading-relaxed italic font-normal">
+                        &ldquo;{item.quote}&rdquo;
+                      </p>
+                    </div>
 
-                <div className="pt-6 mt-6 border-t border-[#E9E5DC]/80 space-y-1 text-left">
-                  <h4 className="font-sans text-sm font-semibold text-[#20211E]">
-                    {item.clientName}
-                  </h4>
-                  <p className="font-sans text-xs text-[#777B60]">
-                    {item.role}
-                  </p>
-                  <p className="font-mono text-[11px] text-[#797C72] pt-1">
-                    {item.commission} · {item.location} ({item.year})
-                  </p>
-                </div>
-              </article>
+                    <div className="pt-6 mt-6 border-t border-[#E9E5DC]/80 space-y-1 text-left">
+                      <h4 className="font-sans text-sm font-semibold text-[#20211E]">
+                        {item.clientName}
+                      </h4>
+                      <p className="font-sans text-xs text-[#777B60]">
+                        {item.role}
+                      </p>
+                      <p className="font-mono text-[11px] text-[#797C72] pt-1">
+                        {item.commission} · {item.location} ({item.year})
+                      </p>
+                    </div>
+                  </article>
+                </CardHover>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </Container>
     </section>
