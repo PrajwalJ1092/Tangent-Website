@@ -5,6 +5,7 @@ import {
   Breadcrumbs,
   ImageFrame,
   Badge,
+  SEO,
 } from '@/components/ui'
 import { ScrollReveal, MaskedText, CardHover } from '@/components/motion'
 import { JOURNAL_ARTICLES } from '@/data/journal'
@@ -21,6 +22,12 @@ export function JournalArticlePage() {
 
   return (
     <article className="py-10 space-y-16">
+      <SEO
+        title={article.title}
+        description={article.excerpt}
+        ogType="article"
+        ogImage={article.coverImage.url}
+      />
       <Container>
         {/* Breadcrumb Navigation */}
         <div className="mb-8">
@@ -107,7 +114,7 @@ export function JournalArticlePage() {
                     "{section.quote}"
                   </p>
                   <cite className="block text-[11px] font-mono text-[#777B60] uppercase tracking-wider mt-3 not-italic">
-                    — Tangent Studio Monograph Notes
+                    — The Tangent Collaborative Monograph Notes
                   </cite>
                 </blockquote>
               )}

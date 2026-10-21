@@ -15,6 +15,7 @@ import {
   Button,
   Badge,
   ImageFrame,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -31,6 +32,10 @@ export function AboutPage() {
 
   return (
     <div className="py-10 space-y-20">
+      <SEO
+        title="Studio Practice &amp; Spatial Philosophy"
+        description="The Tangent Collaborative is an architectural practice defined by tectonic order, monolithic materials, and calibrated daylight across Bangalore, Vijayapura, and Hubballi."
+      />
       {/* Editorial Header */}
       <Container>
         <ScrollReveal variant="fade-up" duration={0.6}>
@@ -44,7 +49,7 @@ export function AboutPage() {
               />
             }
             title="Monolithic Restraint & Material Honesty"
-            subtitle="Tangent Studio is an architectural practice and spatial research atelier. We conceive residential pavilions, cultural galleries, and tactile interior environments defined by structural order, raw materials, and calibrated daylight."
+            subtitle="The Tangent Collaborative is an architectural practice and spatial research atelier. We conceive residential pavilions, cultural galleries, and tactile interior environments defined by structural order, raw materials, and calibrated daylight across Bangalore, Vijayapura, and Hubballi."
           />
         </ScrollReveal>
 
@@ -53,7 +58,7 @@ export function AboutPage() {
           <div className="border border-[#E9E5DC] bg-[#EFECE6]/40 overflow-hidden relative">
             <ImageFrame
               src={ARCHITECTURAL_ASSETS.nordicPavilion!.url}
-              alt="Tangent Studio Architectural Practice Monograph"
+              alt="The Tangent Collaborative Architectural Practice Monograph"
               aspectRatio="wide"
               className="w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
             />
@@ -173,7 +178,7 @@ export function AboutPage() {
             <div className="border border-[#E9E5DC] bg-[#EFECE6]/40 p-3">
               <ImageFrame
                 src={ARCHITECTURAL_ASSETS.kyotoAtelier?.url || ''}
-                alt="Tangent Studio Interior Architecture Workshop"
+                alt="The Tangent Collaborative Interior Architecture Workshop"
                 aspectRatio="landscape"
                 className="w-full object-cover"
               />
@@ -315,6 +320,73 @@ export function AboutPage() {
           ))}
         </StaggerGroup>
       </Container>
+
+      {/* Regional Practice Footprint & Locations */}
+      <section className="border-t border-[#E9E5DC] bg-[#FCFAF6] py-16">
+        <Container>
+          <ScrollReveal variant="fade-up" duration={0.6}>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-[#E9E5DC]">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>Geographic Practice Matrix</span>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-3xl text-[#20211E]">
+                  Regional Service Areas
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-[#53554D]">
+                {STUDIO_CONFIG.serviceAreasSummary}
+              </span>
+            </div>
+          </ScrollReveal>
+
+          <StaggerGroup stagger={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {STUDIO_CONFIG.serviceAreas.map((area) => (
+              <StaggerItem key={area.id}>
+                <CardHover lift={4} className="h-full">
+                  <div className="p-6 border border-[#E9E5DC] bg-white space-y-4 h-full flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#777B60]">
+                          {area.stateProvince}, {area.country}
+                        </span>
+                        <Badge variant="outline" className="text-[10px] font-mono text-[#777B60] border-[#E9E5DC]">
+                          Active Region
+                        </Badge>
+                      </div>
+
+                      <h3 className="font-serif text-2xl text-[#20211E]">
+                        {area.displayName}
+                      </h3>
+
+                      <div className="text-xs font-mono text-[#777B60] pb-2 border-b border-[#E9E5DC]">
+                        {area.coordinates.formatted}
+                      </div>
+
+                      <p className="text-xs text-[#53554D] leading-relaxed font-sans">
+                        {area.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-[#E9E5DC]">
+                      <a
+                        href={area.directionsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-mono uppercase tracking-wider text-[#20211E] hover:text-[#777B60] flex items-center justify-between group"
+                      >
+                        <span>Directions to {area.displayName}</span>
+                        <span className="transition-transform group-hover:translate-x-1">→</span>
+                      </a>
+                    </div>
+                  </div>
+                </CardHover>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </Container>
+      </section>
 
       {/* Selected Built Projects Showcase */}
       <section className="border-t border-[#E9E5DC] bg-[#FCFAF6] py-16">

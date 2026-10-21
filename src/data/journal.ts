@@ -53,7 +53,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
         heading: 'I. The Primacy of Architectural Mass',
         paragraphs: [
           'Modern construction has largely surrendered to the logic of the curtain wall—an assembly of composite panels, vapor membranes, and insulated glass units suspended from lightweight steel ribs. While engineered for rapid assembly, such skins inevitably lack the deep tectonic inertia that grounds architecture in geological time.',
-          'At Tangent Studio, our exploration begins with the opposite premise: what happens when walls possess genuine physical depth? In our high-altitude commissions, cast-in-place concrete forms an unbroken structural shell. The 450mm wall assembly buffers extreme diurnal temperature swings, absorbing low winter sunlight and releasing stored calories throughout the sub-zero alpine nights.',
+          'At The Tangent Collaborative, our exploration begins with the opposite premise: what happens when walls possess genuine physical depth? In our high-altitude commissions, cast-in-place concrete forms an unbroken structural shell. The 450mm wall assembly buffers extreme diurnal temperature swings, absorbing low winter sunlight and releasing stored calories throughout the sub-zero alpine nights.',
         ],
         quote: 'Mass is not inert matter; it is a temporal instrument that registers the passage of hours through light and temperature.',
       },
@@ -139,7 +139,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
         heading: 'I. The Limitations of Virtual Perfection',
         paragraphs: [
           'Inside a 3D modeling environment, two surfaces intersect with mathematical zero-tolerance. In the physical realm, timber swells with humidity, concrete shrinks during cure, and steel tolerances fluctuate by millimeters. The naive translation of CAD models to construction sites inevitably produces clumsy caulk joints and trim cover-ups.',
-          'At Tangent Studio, we reject trim pieces. Every shadow gap, reveal line, and acoustic slat is planned with intentional breathing room. We test these interfaces in physical 1:1 prototypes before issuing final shop drawings.',
+          'At The Tangent Collaborative, we reject trim pieces. Every shadow gap, reveal line, and acoustic slat is planned with intentional breathing room. We test these interfaces in physical 1:1 prototypes before issuing final shop drawings.',
         ],
         quote: 'True craftsmanship is not the denial of material tolerance, but the artful accommodation of it.',
       },

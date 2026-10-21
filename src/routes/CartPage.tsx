@@ -21,6 +21,7 @@ import {
   ImageFrame,
   Badge,
   EmptyState,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -60,6 +61,10 @@ export function CartPage() {
 
   return (
     <div className="py-10 space-y-12">
+      <SEO
+        title="Studio Acquisition Bag"
+        description="Review selected architectural monographs, CAD libraries, and calibrated 3D visualization scenes queued for acquisition."
+      />
       <Container>
         <div className="space-y-6">
           <Breadcrumbs

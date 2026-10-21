@@ -158,5 +158,24 @@ describe('Portfolio & Projects Architecture', () => {
       expect(screen.queryByRole('dialog', { name: /Image gallery lightbox/i })).not.toBeInTheDocument()
     })
   })
+
+  it('renders the Belagavi 3BHK apartment project monograph with floor plan and full gallery', () => {
+    renderRoute('/projects/belagavi-3bhk-apartment')
+
+    // Heading and location
+    expect(screen.getByRole('heading', { name: /3BHK Residence at Belagavi/i })).toBeInTheDocument()
+    expect(screen.getByText(/Belagavi, Karnataka, India/i)).toBeInTheDocument()
+    expect(screen.getByText(/1,850 sq ft \/ 172 m²/i)).toBeInTheDocument()
+
+    // Key architectural specifications
+    expect(screen.getByText(/3BHK Contemporary Apartment/i)).toBeInTheDocument()
+    expect(screen.getByText(/Fluted Acoustic Paneling & Travertine Slab/i)).toBeInTheDocument()
+    expect(screen.getByText(/Bronze Tinted Glass & Hand-Woven Cane Mesh/i)).toBeInTheDocument()
+
+    // Gallery plates including floor plan, living, pooja, master suite
+    expect(screen.getByAltText(/Architectural floor plan layout for 3BHK Apartment at Belagavi/i)).toBeInTheDocument()
+    expect(screen.getByAltText(/Pooja room sanctum with illuminated arched niche/i)).toBeInTheDocument()
+    expect(screen.getByAltText(/Bedroom 01 featuring custom wardrobe with natural woven cane mesh inserts/i)).toBeInTheDocument()
+  })
 })
 

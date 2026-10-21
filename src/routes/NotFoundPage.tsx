@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Compass, Home, Layers, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { SEO } from '@/components/ui/SEO'
 import { ScrollReveal, MaskedText, CardHover } from '@/components/motion'
 
 export function NotFoundPage() {
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-6 py-24 sm:py-32 text-center max-w-xl mx-auto space-y-6">
+      <SEO
+        title="404 — Page Not Found"
+        description="The requested spatial reference does not exist or has been relocated within The Tangent Collaborative archive."
+      />
       <ScrollReveal variant="fade-up" duration={0.6}>
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EFECE6]/60 border border-[#E9E5DC] text-[11px] font-mono uppercase tracking-widest text-[#777B60]">
           <Compass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '8s' }} />

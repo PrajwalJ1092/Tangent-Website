@@ -8,6 +8,7 @@ import {
   Button,
   EmptyState,
   ProductCard,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -83,6 +84,10 @@ export function ShopPage() {
 
   return (
     <div className="py-10 space-y-16">
+      <SEO
+        title="Digital Marketplace &amp; 3D Assets"
+        description="Production-grade CAD details, tactile material scans, editorial monograph templates, and calibrated 3D visualization scenes."
+      />
       {/* Editorial Header with Masked Typography */}
       <Container>
         <div className="space-y-6">
@@ -105,7 +110,7 @@ export function ShopPage() {
             <ScrollReveal delay={0.15}>
               <p className="font-sans text-lg sm:text-xl text-[#53554D] font-light leading-relaxed max-w-3xl">
                 Production-grade CAD libraries, tactile material scans, editorial monograph templates,
-                and calibrated 3D visualization scenes crafted by Tangent Studio architects.
+                and calibrated 3D visualization scenes crafted by The Tangent Collaborative architects.
               </p>
             </ScrollReveal>
           </div>

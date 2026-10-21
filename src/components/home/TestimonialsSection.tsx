@@ -17,7 +17,7 @@ const TESTIMONIAL_FIXTURES: PatronTestimonial[] = [
   {
     id: 'test-01',
     quote:
-      'Tangent Studio approaches spatial volume not as an arbitrary enclosure, but as an instrument tuned to the topography and northern light. Living in the Pavilion has rewired our relationship with silence.',
+      'The Tangent Collaborative approaches spatial volume not as an arbitrary enclosure, but as an instrument tuned to the topography and northern light. Living in the Pavilion has rewired our relationship with silence.',
     clientName: 'Dr. Henrik Lindqvist',
     role: 'Patron & Architectural Trustee',
     commission: 'Nordic Forest Pavilion',

@@ -13,7 +13,7 @@ export interface ProjectIndexViewProps {
 
 export function ProjectIndexView({ projects }: ProjectIndexViewProps) {
   const [activeProject, setActiveProject] = useState<Project | null>(projects[0] ?? null)
-  const isMotionSafe = useMotionSafe()
+  const { isMotionSafe } = useMotionSafe()
 
   const firstProject = projects[0]
   if (projects.length === 0 || !firstProject) return null

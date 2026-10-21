@@ -537,7 +537,7 @@ export const PRODUCTS: DigitalProduct[] = [
     name: 'Complete Spatial Studio Master Bundle',
     title: 'Complete Spatial Studio Master Bundle',
     shortDescription:
-      'The definitive Tangent Studio digital toolkit: 3D scene files, InDesign monographs, CAD details, PBR materials, and HDRI skies.',
+      'The definitive The Tangent Collaborative digital toolkit: 3D scene files, InDesign monographs, CAD details, PBR materials, and HDRI skies.',
     fullDescription:
       'An all-encompassing suite combining our six most essential digital architectural resources at an exceptional bundle value.\n\nEquips independent architects, boutique spatial practices, and visualization studios with an integrated, cohesive aesthetic toolkit spanning presentation design, construction drafting, and photorealistic CGI production.\n\nIncludes lifetime version upgrades and priority studio support.',
     category: 'digital-bundles',
@@ -591,7 +591,7 @@ export const PRODUCTS: DigitalProduct[] = [
       'Complete digital archive combining all 7 studio resources + exclusive Master Scope & BOQ Suite',
       'Over 11.4 GB of production-tested architectural assets, templates, and 3D scenes',
       'Includes Extended Studio Enterprise License covering entire firm and unlimited client projects',
-      'Lifetime free volume updates and priority access to future Tangent Studio releases',
+      'Lifetime free volume updates and priority access to future The Tangent Collaborative releases',
     ],
     targetAudience: [
       'Architectural practices establishing firm-wide presentation and documentation standards',
@@ -625,7 +625,7 @@ export const PRODUCTS: DigitalProduct[] = [
         answer: 'Yes, Master Bundle patrons receive free incremental volume updates and new joinery packs.',
       },
     ],
-    headline: 'The definitive Tangent Studio digital toolkit across 5 curated volumes',
+    headline: 'The definitive The Tangent Collaborative digital toolkit across 5 curated volumes',
     description: 'An all-encompassing suite combining our six most essential digital architectural resources.',
     priceInr: 24990,
     priceUsd: 299,

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronDown, ArrowRight } from 'lucide-react'
-import { Container, PageHeading, Breadcrumbs, Button } from '@/components/ui'
+import { Container, PageHeading, Breadcrumbs, Button, SEO } from '@/components/ui'
 import { ScrollReveal } from '@/components/motion'
 
 interface FaqItem {
@@ -14,7 +14,7 @@ interface FaqItem {
 const FAQ_ITEMS: FaqItem[] = [
   {
     category: 'Commissions & Practice',
-    question: 'What types of architectural commissions does Tangent Studio accept?',
+    question: 'What types of architectural commissions does The Tangent Collaborative accept?',
     answer:
       'We focus on bespoke private residential pavilions, alpine retreats, cultural exhibition galleries, and spatial interior architecture. We intentionally limit our active concurrent projects to maintain direct partner-level oversight on every detail.',
   },
@@ -22,7 +22,7 @@ const FAQ_ITEMS: FaqItem[] = [
     category: 'Commissions & Practice',
     question: 'How does the studio manage international or remote commissions?',
     answer:
-      'We operate globally. Initial schematic design and BIM coordination are conducted digitally with photogrammetric terrain surveys. During the realization stage, our architects perform on-site audits, 1:1 millwork reviews, and supervise critical structural casting alongside local executive architects and artisans.',
+      'We operate across Karnataka—serving Bangalore, Vijayapura, and Hubballi—alongside select national and international commissions. Initial schematic design and BIM coordination are conducted digitally with photogrammetric terrain surveys. During the realization stage, our architects perform on-site audits, 1:1 millwork reviews, and supervise critical structural casting alongside local executive architects and artisans.',
   },
   {
     category: 'Commissions & Practice',
@@ -52,7 +52,7 @@ const FAQ_ITEMS: FaqItem[] = [
     category: 'Billing & Operations',
     question: 'Why are prices displayed in Indian Rupees (INR ₹)?',
     answer:
-      'Tangent Studio maintains its principal spatial computing and research atelier in Bengaluru, India, alongside global collaborations. All marketplace pricing is anchored in INR with authoritative paise precision.',
+      'The Tangent Collaborative operates across Karnataka, India—serving Bangalore, Vijayapura, and Hubballi (Hubli)—alongside international commissions. All marketplace pricing is anchored in INR with authoritative paise precision.',
   },
   {
     category: 'Billing & Operations',
@@ -79,6 +79,10 @@ export function FaqPage() {
 
   return (
     <div className="py-10 space-y-16">
+      <SEO
+        title="Frequently Asked Questions"
+        description="Transparent disclosures on The Tangent Collaborative architectural commissions, digital asset licensing terms, and studio operations across Bangalore, Vijayapura, and Hubballi."
+      />
       <Container>
         <ScrollReveal variant="fade-up" duration={0.6}>
           <PageHeading

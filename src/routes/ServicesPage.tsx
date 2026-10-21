@@ -9,6 +9,7 @@ import {
   Breadcrumbs,
   Button,
   ImageFrame,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -19,6 +20,10 @@ import { STUDIO_SERVICES } from '@/data/services'
 export function ServicesPage() {
   return (
     <div className="py-10 space-y-20">
+      <SEO
+        title="Services &amp; Architectural Disciplines"
+        description="Comprehensive architecture, interior design, spatial planning, and architectural visualization services by The Tangent Collaborative across Bangalore, Vijayapura, and Hubballi."
+      />
       <Container>
         <ScrollReveal variant="fade-up" duration={0.6}>
           <PageHeading

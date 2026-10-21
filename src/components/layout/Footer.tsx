@@ -16,9 +16,9 @@ export function Footer() {
                 to="/"
                 className="font-serif text-2xl tracking-tight text-[#20211E] flex items-baseline gap-1.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#20211E] rounded-sm"
               >
-                <span className="font-normal">{STUDIO_CONFIG.studioName.split(' ')[0]}</span>
+                <span className="font-normal">{STUDIO_CONFIG.wordmark.prefix}</span>
                 <span className="font-sans text-[11px] tracking-[0.22em] uppercase text-[#797C72] font-medium">
-                  {STUDIO_CONFIG.studioName.split(' ')[1] || 'Studio'}
+                  {STUDIO_CONFIG.wordmark.suffix}
                 </span>
               </Link>
               <p className="font-sans text-sm leading-relaxed text-[#53554D] max-w-sm font-light">
@@ -117,11 +117,13 @@ export function Footer() {
             <StaggerItem className="space-y-4 text-sm font-sans lg:col-span-1">
               <div className="space-y-2">
                 <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-[#20211E]">
-                  Studio Locations
+                  Regional Service Areas
                 </p>
-                <p className="text-xs text-[#53554D] leading-relaxed">
-                  {STUDIO_CONFIG.address.city}, {STUDIO_CONFIG.address.country}
-                </p>
+                <div className="space-y-1 text-xs text-[#53554D] leading-relaxed font-mono">
+                  <div>Bangalore, Karnataka</div>
+                  <div>Vijayapura, Karnataka</div>
+                  <div>Hubballi (Hubli), Karnataka</div>
+                </div>
               </div>
 
               <div className="space-y-2 pt-1">
@@ -167,11 +169,17 @@ export function Footer() {
 
         {/* Bottom bar with legal placeholders & copyright */}
         <div className="border-t border-[#E9E5DC] py-6 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#797C72] font-sans">
-          <p>&copy; {currentYear} Tangent Studio Architecture &amp; Spatial Systems. All rights reserved.</p>
+          <p>&copy; {currentYear} {STUDIO_CONFIG.companyName}. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <span className="hover:text-[#20211E] cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="hover:text-[#20211E] cursor-pointer transition-colors">Terms of Service</span>
-            <span className="hover:text-[#20211E] cursor-pointer transition-colors">Commercial License</span>
+            <Link to="/faq" className="hover:text-[#20211E] transition-colors">
+              Privacy &amp; Data
+            </Link>
+            <Link to="/faq" className="hover:text-[#20211E] transition-colors">
+              Terms of Practice
+            </Link>
+            <Link to="/faq" className="hover:text-[#20211E] transition-colors">
+              Commercial License Terms
+            </Link>
           </div>
         </div>
       </ScrollReveal>

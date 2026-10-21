@@ -32,10 +32,12 @@ export function CinematicHero() {
         className="absolute inset-0 z-0 origin-center will-change-transform"
         style={{ scale: imageScale, y: imageY }}
       >
+
+
         <img
-          src={ARCHITECTURAL_ASSETS.cinematicHeroLandscape?.url || ARCHITECTURAL_ASSETS.nordicPavilion!.url}
-          alt={ARCHITECTURAL_ASSETS.cinematicHeroLandscape?.alt || 'Monolithic architecture pavilion in scandinavian pine forest'}
-          className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-[1.08]"
+          src={ARCHITECTURAL_ASSETS.cinematicHeroLandscape?.url || '/images/hero.jpeg'}
+          alt={ARCHITECTURAL_ASSETS.cinematicHeroLandscape?.alt || 'The Tangent Collaborative — Modern tropical residence with exposed brick masonry, concrete cantilever, and wooden pergola'}
+          className="w-full h-full object-cover object-center filter brightness-[0.82] contrast-[1.05]"
           loading="eager"
           fetchPriority="high"
         />
@@ -62,9 +64,9 @@ export function CinematicHero() {
             <span className="text-[#D3CDC0]">Practice &amp; Digital Archive</span>
           </div>
           <div className="flex items-center gap-4 text-[11px] text-[#D3CDC0]/90">
-            <span>Lat 47.3769° N, 8.5417° E</span>
+            <span>Lat 12.9716° N, 77.5946° E</span>
             <span className="hidden md:inline text-white/30">•</span>
-            <span className="hidden md:inline">Zurich · Copenhagen · Bengaluru</span>
+            <span className="hidden md:inline">Bangalore · Vijayapura · Hubballi</span>
           </div>
         </div>
       </div>
@@ -83,19 +85,20 @@ export function CinematicHero() {
             className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/15 bg-black/40 backdrop-blur-md text-[11px] font-mono uppercase tracking-[0.2em] text-[#E9E5DC]"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#777B60]" />
-            <span>Monograph Vol. 04 / Architectural Commission &amp; Spatial Tectonics</span>
+            <span>DESIGN APPROACH / PLACE · PEOPLE · MATERIAL</span>
           </motion.div>
 
           {/* Masked Monumental Headline */}
           <div className="space-y-2">
-            <div className="overflow-hidden">
+            <div className="overflow-hidden pb-1">
               <motion.h1
                 initial={{ y: '115%', opacity: 0 }}
                 animate={{ y: '0%', opacity: 1 }}
                 transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-normal tracking-tight text-white leading-[0.98] text-balance"
+                className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-tight text-white leading-[1.08] sm:leading-[1.02]"
               >
-                Formed by Light. Grounded in Matter.
+                <span className="block">The space between an idea</span>
+                <span className="block text-[#E9E5DC]">and the place it becomes.</span>
               </motion.h1>
             </div>
           </div>
@@ -108,7 +111,8 @@ export function CinematicHero() {
               transition={{ duration: 0.85, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="md:col-span-7 font-sans text-base sm:text-lg text-[#E9E5DC]/90 font-light leading-relaxed max-w-2xl"
             >
-              Spaces shaped by light, material and intention. Tangent Studio bridges physical architecture and digital craft—constructing residential sanctuaries and producing rigorous design documentation tools.
+              We design buildings and interiors that respond to place, climate and everyday life. From the first conversation to detailed drawings, each decision is made with care, clarity and purpose.
+—constructing spaces of purpose and producing rigorous design documentation tools across INDIA
             </motion.p>
 
             <motion.div

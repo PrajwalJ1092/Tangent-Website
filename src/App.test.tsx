@@ -2,12 +2,12 @@ import { render, screen, within } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import App from '@/App'
 
-describe('Tangent Studio Global Layout & Homepage', () => {
+describe('The Tangent Collaborative Global Layout & Homepage', () => {
   it('renders global navigation with all required items and cart indicator', () => {
     render(<App />)
 
     const header = screen.getByRole('banner')
-    expect(within(header).getByRole('link', { name: /Tangent Studio Home/i })).toBeInTheDocument()
+    expect(within(header).getByRole('link', { name: /The Tangent Collaborative Home/i })).toBeInTheDocument()
     expect(within(header).getByRole('link', { name: /^Home$/i })).toBeInTheDocument()
     expect(within(header).getByRole('link', { name: /^Projects$/i })).toBeInTheDocument()
     expect(within(header).getByRole('link', { name: /^Studio$/i })).toBeInTheDocument()
@@ -22,7 +22,7 @@ describe('Tangent Studio Global Layout & Homepage', () => {
     // A. Hero section
     expect(
       screen.getByRole('heading', {
-        name: /Formed by Light\. Grounded in Matter\./i,
+        name: /The space between an idea\s+and the place it becomes\./i,
       }),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Explore Projects/i })).toBeInTheDocument()
@@ -66,7 +66,7 @@ describe('Tangent Studio Global Layout & Homepage', () => {
 
     // H. Footer section
     const footer = screen.getByRole('contentinfo')
-    expect(within(footer).getByText(/Tangent Studio Architecture & Spatial Systems/i)).toBeInTheDocument()
-    expect(within(footer).getByText(/Bengaluru/i)).toBeInTheDocument()
+    expect(within(footer).getByText(/The Tangent Collaborative/i)).toBeInTheDocument()
+    expect(within(footer).getByText(/Bangalore/i)).toBeInTheDocument()
   })
 })

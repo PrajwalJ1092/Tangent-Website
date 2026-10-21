@@ -39,7 +39,7 @@ export function DesignSystemPage() {
             />
           }
           title="Architectural Design System"
-          subtitle="Tectonic clarity, editorial restraint, and museum-grade typographic precision for Tangent Studio."
+          subtitle="Tectonic clarity, editorial restraint, and museum-grade typographic precision for The Tangent Collaborative."
         />
       </Container>
 

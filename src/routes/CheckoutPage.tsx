@@ -15,6 +15,7 @@ import {
   Container,
   Breadcrumbs,
   Button,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -102,6 +103,10 @@ export function CheckoutPage() {
 
   return (
     <div className="py-10 space-y-12">
+      <SEO
+        title="Simulated Studio Checkout"
+        description="Demo checkout prototype for The Tangent Collaborative digital architecture resources."
+      />
       <Container>
         <div className="space-y-6">
           <Breadcrumbs
@@ -357,7 +362,7 @@ export function CheckoutPage() {
                         className="mt-1 h-4 w-4 rounded border-[#E9E5DC] text-[#20211E] focus:ring-[#20211E] cursor-pointer"
                       />
                       <span className="text-xs text-[#53554D] leading-relaxed">
-                        I understand and agree to the <strong>Tangent Studio Digital License Agreement</strong>. I understand that assets are licensed for commercial studio visualization and construction document usage, and raw 3D mesh or file redistribution is strictly prohibited. I also acknowledge this is a <strong>simulated prototype order</strong> with zero actual monetary charge.
+                        I understand and agree to the <strong>The Tangent Collaborative Digital License Agreement</strong>. I understand that assets are licensed for commercial studio visualization and construction document usage, and raw 3D mesh or file redistribution is strictly prohibited. I also acknowledge this is a <strong>simulated prototype order</strong> with zero actual monetary charge.
                       </span>
                     </label>
                     <AnimatePresence>

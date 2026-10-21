@@ -2,7 +2,7 @@ import { useReducedMotion } from 'motion/react'
 import { useState, useEffect } from 'react'
 
 /**
- * TANGENT STUDIO — GLOBAL MOTION TOKENS
+ * THE TANGENT COLLABORATIVE — GLOBAL MOTION TOKENS
  * Architectural, cinematic, and restrained motion language for luxury spatial design.
  */
 
@@ -126,6 +126,7 @@ export function useMotionSafe() {
   const prefersReduced = useReducedMotion()
   return {
     isReduced: !!prefersReduced,
+    isMotionSafe: !prefersReduced,
     easings: MOTION_EASINGS,
     durations: MOTION_DURATIONS,
     staggers: MOTION_STAGGERS,

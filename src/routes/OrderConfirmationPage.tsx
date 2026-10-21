@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import {
   CheckCircle2,
@@ -9,6 +9,8 @@ import {
   FileCode,
   Calendar,
   ArrowRight,
+  X,
+  Check,
 } from 'lucide-react'
 import { useCart } from '@/context'
 import {
@@ -17,6 +19,7 @@ import {
   Button,
   Badge,
   EmptyState,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -52,6 +55,22 @@ export function OrderConfirmationPage() {
     return null
   }, [lastOrder, orderIdParam])
 
+  const [downloadModalItem, setDownloadModalItem] = useState<{
+    productName: string
+    files: string[]
+  } | null>(null)
+
+  useEffect(() => {
+    if (!downloadModalItem) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDownloadModalItem(null)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [downloadModalItem])
+
   if (!order) {
     return (
       <div className="py-20">
@@ -84,6 +103,10 @@ export function OrderConfirmationPage() {
 
   return (
     <div className="py-10 space-y-12">
+      <SEO
+        title="Simulated Order Receipt"
+        description="Demo prototype order receipt and digital asset licensing confirmation."
+      />
       <Container>
         {/* Navigation & Header with Masked Typography */}
         <div className="space-y-6">
@@ -208,9 +231,10 @@ export function OrderConfirmationPage() {
                         <button
                           type="button"
                           onClick={() =>
-                            alert(
-                              `[Prototype Simulation]\n\nIn a production deployment, this triggers an encrypted, signed CDN download for "${item.productName}" archive bundle.\n\nIncluded files:\n• ${item.includedFiles.join('\n• ')}`,
-                            )
+                            setDownloadModalItem({
+                              productName: item.productName,
+                              files: item.includedFiles,
+                            })
                           }
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono uppercase tracking-wider bg-[#20211E] text-white hover:bg-[#3A3B36] transition-colors shrink-0 rounded cursor-pointer"
                         >
@@ -239,7 +263,7 @@ export function OrderConfirmationPage() {
 
                 {/* Commercial license reassurance note */}
                 <div className="p-4 border border-[#E9E5DC] bg-[#FCFAF6] rounded-lg text-xs font-mono text-[#53554D] leading-relaxed">
-                  <strong>Digital Licensing Certificate: </strong> All assets are granted under Tangent Studio perpetual commercial usage terms. Download links remain active indefinitely via your account or receipt link.
+                  <strong>Digital Licensing Certificate: </strong> All assets are granted under The Tangent Collaborative perpetual commercial usage terms. Download links remain active indefinitely via your account or receipt link.
                 </div>
               </div>
             </ScrollReveal>
@@ -318,6 +342,72 @@ export function OrderConfirmationPage() {
           </div>
         </div>
       </Container>
+
+      {/* Simulated Download Delivery Modal Dialog */}
+      {downloadModalItem && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="download-modal-title"
+        >
+          <div className="bg-white max-w-lg w-full p-6 sm:p-8 rounded-lg border border-[#E9E5DC] shadow-2xl space-y-6 text-left">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E9E5DC]">
+              <div className="space-y-0.5">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#777B60]">
+                  Encrypted CDN Distribution
+                </span>
+                <h3 id="download-modal-title" className="font-serif text-xl sm:text-2xl text-[#20211E]">
+                  {downloadModalItem.productName}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDownloadModalItem(null)}
+                className="p-1 text-[#797C72] hover:text-[#20211E] rounded transition-colors cursor-pointer"
+                aria-label="Close download modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-4 bg-emerald-50 border border-emerald-200 text-xs font-mono text-emerald-950 space-y-2 rounded">
+              <div className="flex items-center gap-2 font-semibold">
+                <Check className="w-4 h-4 text-emerald-700" />
+                <span>Simulated Secure Token Validated</span>
+              </div>
+              <p className="text-[11px] leading-relaxed">
+                In production, this initiates a signed CDN stream directly delivering the high-speed uncompressed .zip archive.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#20211E] block">
+                Archive Package Manifest ({downloadModalItem.files.length} items):
+              </span>
+              <div className="max-h-40 overflow-y-auto divide-y divide-[#E9E5DC] border border-[#E9E5DC] rounded text-xs font-mono bg-[#FCFAF6]">
+                {downloadModalItem.files.map((file, idx) => (
+                  <div key={idx} className="p-2.5 flex items-center justify-between text-[#20211E]">
+                    <span className="truncate pr-2 font-mono text-[11px]">📁 {file}</span>
+                    <span className="text-emerald-700 text-[10px] uppercase font-semibold">Ready</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-2 flex justify-end gap-3">
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => setDownloadModalItem(null)}
+                className="cursor-pointer font-mono text-xs uppercase tracking-wider"
+              >
+                Close Dialog [ESC]
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

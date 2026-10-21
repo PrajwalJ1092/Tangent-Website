@@ -28,6 +28,7 @@ import {
   Button,
   EmptyState,
   ProductCard,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -49,7 +50,7 @@ export function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const product = useMemo(() => (slug ? getProductBySlug(slug) : undefined), [slug])
   const { addItem, setIsCartOpen } = useCart()
-  const isMotionSafe = useMotionSafe()
+  const { isMotionSafe } = useMotionSafe()
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [isAdded, setIsAdded] = useState(false)
@@ -115,8 +116,30 @@ export function ProductDetailPage() {
     setExpandedFaqIndex(expandedFaqIndex === index ? null : index)
   }
 
+  const productJsonLd = {
+    '@context': 'https://schema.org/',
+    '@type': 'Product',
+    name: product.name,
+    image: [product.coverImage.url],
+    description: product.shortDescription,
+    sku: product.id,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'INR',
+      price: (product.priceInPaise / 100).toFixed(2),
+      availability: 'https://schema.org/InStock',
+    },
+  }
+
   return (
     <div className="py-10 space-y-16">
+      <SEO
+        title={product.name}
+        description={product.shortDescription}
+        ogType="product"
+        ogImage={product.coverImage.url}
+        jsonLd={productJsonLd}
+      />
       <Container>
         {/* Navigation Breadcrumbs & Back Link */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E9E5DC]">
@@ -555,8 +578,6 @@ export function ProductDetailPage() {
           <ProductReviewsSection
             productId={product.id}
             productName={product.name}
-            rating={product.rating || 4.9}
-            reviewsCount={product.reviewsCount || 38}
             initialReviews={product.reviewsList}
           />
         </ScrollReveal>

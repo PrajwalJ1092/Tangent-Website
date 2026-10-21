@@ -9,6 +9,7 @@ import {
   Button,
   Metadata,
   EmptyState,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -89,6 +90,11 @@ export function ProjectDetailPage() {
 
   return (
     <article className="py-10 space-y-16 sm:space-y-24">
+      <SEO
+        title={project.title}
+        description={project.shortDescription}
+        ogImage={project.coverImage.url}
+      />
       {/* 1. Breadcrumb Navigation & Top Return Link */}
       <Container>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E9E5DC]">

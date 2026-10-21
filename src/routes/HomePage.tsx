@@ -11,6 +11,7 @@ import {
   Button,
   Badge,
   TextLink,
+  SEO,
 } from '@/components/ui'
 import { ARCHITECTURAL_ASSETS } from '@/data/assets'
 import { DEMO_PROJECTS, DEMO_PRODUCTS } from '@/data/mockData'
@@ -32,6 +33,7 @@ import {
   CardHover,
   HoverUnderline,
 } from '@/components/motion'
+import { STUDIO_CONFIG } from '@/data/studioInfo'
 
 export function HomePage() {
   const { addItem } = useCart()
@@ -47,6 +49,11 @@ export function HomePage() {
 
   return (
     <div className="space-y-24 sm:space-y-36 pb-24">
+      <SEO
+        title="The Tangent Collaborative — Architecture &amp; Spatial Design"
+        description="The Tangent Collaborative is an architectural practice and digital marketplace grounded in tectonic timber framing, monolithic cast stone, and calibrated 3D spatial scene files across Bangalore, Vijayapura, and Hubballi."
+        ogType="website"
+      />
       {/* =========================================================================
           SECTION 1 — CINEMATIC HERO
           Full-viewport architectural canvas, parallax scale drift, masked typography,
@@ -58,7 +65,7 @@ export function HomePage() {
       <SectionTransition
         variant="hairline"
         label="Section 02 · Studio Monograph Intent"
-        coordinate="Latitude 47.3769° N · Zurich Atelier"
+        coordinate="12.9716° N, 77.5946° E · Karnataka Atelier"
         className="-mt-12 sm:-mt-20"
       />
 
@@ -116,15 +123,15 @@ export function HomePage() {
                 <ParallaxWrapper offset={24}>
                   <div className="relative border border-[#E9E5DC] p-3 bg-white shadow-editorial">
                     <ImageReveal
-                      src={ARCHITECTURAL_ASSETS.kyotoAtelier!.url}
-                      alt={ARCHITECTURAL_ASSETS.kyotoAtelier!.alt}
+                      src={ARCHITECTURAL_ASSETS.sketchArt?.url || '/images/sketch-art.jpeg'}
+                      alt={ARCHITECTURAL_ASSETS.sketchArt?.alt || 'Hand-drawn architectural elevation sketch showing curved balconies, arches, and geometric composition'}
                       aspectRatio="portrait"
                       direction="left"
                       hoverZoom
-                      caption="Private Gallery Residence — Tectonic layering of diffused sunlight and honed travertine."
+                      caption={ARCHITECTURAL_ASSETS.sketchArt?.caption || 'Conceptual Study — Hand-drawn elevation study exploring arches, curvilinear volumes, and natural shadows.'}
                     />
                     <div className="absolute top-5 right-5 text-[10px] font-mono text-[#20211E] bg-white/90 backdrop-blur-sm px-2 py-0.5 border border-[#E9E5DC] z-10 pointer-events-none">
-                      FIG. 02.1 · ATELIER K
+                      FIG. 02.1 · CONCEPT SKETCH
                     </div>
                   </div>
                 </ParallaxWrapper>
@@ -636,7 +643,7 @@ export function HomePage() {
                 </div>
 
                 <div className="pt-8 border-t border-[#E9E5DC]/15 flex flex-wrap items-center gap-x-8 gap-y-2 text-xs text-[#E9E5DC]/70 font-mono">
-                  <span>Direct Inquiries: <a href="mailto:contact@tangent-studio.com" className="text-white underline underline-offset-4 font-sans">contact@tangent-studio.com</a></span>
+                  <span>Direct Inquiries: <a href={`mailto:${STUDIO_CONFIG.inquiriesEmail}`} className="text-white underline underline-offset-4 font-sans">{STUDIO_CONFIG.inquiriesEmail}</a></span>
                   <span>Response Window: Within 48 Hours</span>
                 </div>
               </div>

@@ -10,6 +10,7 @@ import {
   Badge,
   Button,
   EmptyState,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -43,6 +44,10 @@ export function ProjectsPage() {
 
   return (
     <div className="py-10 space-y-12">
+      <SEO
+        title="Architectural Projects &amp; Commissions"
+        description="A monograph archive of residential pavilions, cultural galleries, interior sanctuaries, and acoustic spaces by The Tangent Collaborative."
+      />
       {/* Editorial Header with Masked Typography */}
       <Container>
         <div className="space-y-6">

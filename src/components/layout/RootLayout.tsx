@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { CartProvider } from '@/context'
 import { Navbar } from './Navbar'
@@ -18,7 +19,22 @@ export function RootLayout() {
         <Navbar />
         <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col focus:outline-none">
           <PageTransition>
-            <Outlet />
+            <Suspense
+              fallback={
+                <div
+                  className="flex-1 min-h-[50vh] flex items-center justify-center p-8"
+                  aria-live="polite"
+                  aria-busy="true"
+                >
+                  <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-[#777B60]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#777B60] animate-pulse" />
+                    <span>Loading Monograph Archive...</span>
+                  </div>
+                </div>
+              }
+            >
+              <Outlet />
+            </Suspense>
           </PageTransition>
         </main>
         <Footer />

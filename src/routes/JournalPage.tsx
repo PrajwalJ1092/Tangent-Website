@@ -6,6 +6,7 @@ import {
   Breadcrumbs,
   ImageFrame,
   Badge,
+  SEO,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -21,6 +22,10 @@ export function JournalPage() {
 
   return (
     <div className="py-10 space-y-20">
+      <SEO
+        title="Journal &amp; Spatial Research"
+        description="Essays, material studies, and computational field notes from The Tangent Collaborative's ongoing architectural commissions across Bangalore, Vijayapura, and Hubballi."
+      />
       <Container>
         <ScrollReveal variant="fade-up" duration={0.6}>
           <PageHeading
@@ -33,7 +38,7 @@ export function JournalPage() {
               />
             }
             title="Journal & Spatial Research"
-            subtitle="Essays, material studies, and computational field notes from Tangent Studio's ongoing architectural commissions."
+            subtitle="Essays, material studies, and computational field notes from The Tangent Collaborative's ongoing architectural commissions across Bangalore, Vijayapura, and Hubballi."
           />
         </ScrollReveal>
 

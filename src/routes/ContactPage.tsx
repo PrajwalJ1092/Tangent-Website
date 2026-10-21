@@ -23,6 +23,8 @@ import {
   Breadcrumbs,
   Button,
   Badge,
+  SEO,
+  ArchitecturalLocationMap,
 } from '@/components/ui'
 import {
   ScrollReveal,
@@ -102,6 +104,10 @@ export function ContactPage() {
 
   return (
     <div className="py-10 space-y-16">
+      <SEO
+        title="Contact & Inquiries"
+        description="Commission an architectural dialogue with The Tangent Collaborative for bespoke residential monographs, cultural pavilions, and spatial architecture across Bangalore, Vijayapura, and Hubballi."
+      />
       <Container>
         <ScrollReveal variant="fade-up" duration={0.6}>
           <PageHeading
@@ -352,7 +358,7 @@ export function ContactPage() {
                         className="mt-1 h-4 w-4 rounded-none border-[#E9E5DC] text-[#20211E] focus:ring-[#20211E]"
                       />
                       <span className="text-xs text-[#53554D] leading-relaxed">
-                        I understand that Tangent Studio and {STUDIO_CONFIG.collaborativeName} treat all architectural project briefs with confidentiality. I acknowledge that this form is a <strong>simulated demonstration</strong>.
+                        I understand that {STUDIO_CONFIG.companyName} treats all architectural project briefs with confidentiality. I acknowledge that this form is a <strong>simulated demonstration</strong>.
                       </span>
                     </label>
                     <AnimatePresence>
@@ -454,22 +460,28 @@ export function ContactPage() {
                 <div className="flex items-center justify-between pb-3 border-b border-[#E9E5DC]">
                   <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60]">
                     <MapPin className="w-4 h-4" />
-                    <span>Studio Location</span>
+                    <span>Regional Service Areas</span>
                   </div>
                   <Badge variant="outline" className="text-[10px] text-[#777B60] border-[#E9E5DC]">
-                    {STUDIO_CONFIG.address.isVerified ? 'Verified' : 'Demo Address'}
+                    Karnataka, India
                   </Badge>
                 </div>
 
-                <div className="space-y-1 text-xs font-sans text-[#20211E]">
-                  <div className="font-medium">{STUDIO_CONFIG.address.street}</div>
-                  <div className="text-[#53554D]">{STUDIO_CONFIG.address.suiteOrFloor}</div>
-                  <div className="text-[#53554D]">
-                    {STUDIO_CONFIG.address.city}, {STUDIO_CONFIG.address.stateProvince} {STUDIO_CONFIG.address.postalCode}
+                <div className="space-y-3 text-xs font-sans">
+                  <div className="text-[#20211E] font-medium font-serif text-sm">
+                    {STUDIO_CONFIG.serviceAreasSummary}
                   </div>
-                  <div className="text-[#777B60] font-mono text-[11px] pt-1">
-                    {STUDIO_CONFIG.address.country}
+                  <div className="divide-y divide-[#E9E5DC] border-y border-[#E9E5DC] py-1 text-xs">
+                    {STUDIO_CONFIG.serviceAreas.map((area) => (
+                      <div key={area.id} className="py-2 flex items-center justify-between font-mono">
+                        <span className="font-medium text-[#20211E]">{area.displayName}</span>
+                        <span className="text-[#777B60] text-[11px]">{area.coordinates.formatted}</span>
+                      </div>
+                    ))}
                   </div>
+                  <p className="text-[11px] text-[#777B60] leading-relaxed">
+                    Physical studio consultations and monograph sampling are arranged by prior appointment.
+                  </p>
                 </div>
 
                 {/* Architectural Location Map Box */}
@@ -482,7 +494,7 @@ export function ContactPage() {
                   </div>
 
                   <p className="text-[11px] text-[#53554D] leading-relaxed">
-                    The verified studio entity is registered on Google Maps as <strong>{STUDIO_CONFIG.collaborativeName}</strong>.
+                    The verified practice entity is registered on Google Maps as <strong>{STUDIO_CONFIG.collaborativeName}</strong>.
                   </p>
 
                   {/* Direct Google Maps Action */}
@@ -553,6 +565,26 @@ export function ContactPage() {
             </CardHover>
           </div>
         </div>
+
+        {/* Full-width Architectural Cartography & Location Map Section */}
+        <ScrollReveal variant="fade-up" duration={0.6} className="pt-12 border-t border-[#E9E5DC]">
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-widest text-[#777B60] block">
+                  Geographic Tectonics
+                </span>
+                <h2 className="font-serif text-2xl sm:text-3xl text-[#20211E] pt-1">
+                  Active Regional Service Matrix
+                </h2>
+              </div>
+              <p className="text-xs font-mono text-[#53554D] max-w-md sm:text-right">
+                {STUDIO_CONFIG.serviceAreasShort}
+              </p>
+            </div>
+            <ArchitecturalLocationMap />
+          </div>
+        </ScrollReveal>
       </Container>
     </div>
   )

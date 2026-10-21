@@ -5,6 +5,7 @@ import { useCart } from '@/context'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'motion/react'
 import { HoverUnderline } from '@/components/motion'
+import { STUDIO_CONFIG } from '@/data/studioInfo'
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -111,19 +112,19 @@ export function Navbar() {
         <Link
           to="/"
           className={cn(
-            'font-serif text-2xl tracking-tight transition-colors flex items-baseline gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E] rounded-sm py-1',
+            'font-serif text-xl sm:text-2xl tracking-tight transition-colors flex items-baseline gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20211E] rounded-sm py-1',
             isOverDarkHero ? 'text-white hover:text-[#D3CDC0]' : 'text-[#20211E] hover:text-[#777B60]',
           )}
-          aria-label="Tangent Studio Home"
+          aria-label="The Tangent Collaborative Home"
         >
-          <span className="font-normal">Tangent</span>
+          <span className="font-normal">{STUDIO_CONFIG.wordmark.prefix}</span>
           <span
             className={cn(
-              'font-sans text-[11px] tracking-[0.22em] uppercase font-medium',
+              'font-sans text-[10px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.22em] uppercase font-medium',
               isOverDarkHero ? 'text-[#D3CDC0]' : 'text-[#797C72]',
             )}
           >
-            Studio
+            {STUDIO_CONFIG.wordmark.suffix}
           </span>
         </Link>
 

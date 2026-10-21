@@ -28,7 +28,7 @@ describe('PHASE 06 — Studio Page & Monograph', () => {
       screen.getByRole('heading', { name: /Monolithic Restraint & Material Honesty/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(/Tangent Studio is an architectural practice and spatial research atelier/i),
+      screen.getByText(/The Tangent Collaborative is an architectural practice and spatial research atelier/i),
     ).toBeInTheDocument()
     expect(screen.getByText(/Practice Monograph • Founded on Architectural Craft/i)).toBeInTheDocument()
   })
@@ -85,7 +85,7 @@ describe('PHASE 06 — Contact Page & Inquiry Experience', () => {
     expect(screen.getByRole('heading', { name: /Commission a Dialogue/i })).toBeInTheDocument()
 
     // Centralized contact info
-    expect(screen.getByText(STUDIO_CONFIG.studioName)).toBeInTheDocument()
+    expect(screen.getAllByText(STUDIO_CONFIG.studioName).length).toBeGreaterThan(0)
     expect(screen.getAllByText(new RegExp(STUDIO_CONFIG.collaborativeName, 'i')).length).toBeGreaterThan(0)
     expect(screen.getByText(STUDIO_CONFIG.inquiriesEmail)).toBeInTheDocument()
     expect(screen.getAllByText(new RegExp(STUDIO_CONFIG.email, 'i')).length).toBeGreaterThan(0)

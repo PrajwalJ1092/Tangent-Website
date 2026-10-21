@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="8" fill="#20211E"/>
+  <!-- The Tangent Collaborative Architectural Monogram: T and geometric angle -->
+  <path d="M14 20H50V26H35V48H29V26H14V20Z" fill="#F6F4EF"/>
+  <circle cx="48" cy="48" r="4" fill="#777B60"/>
+</svg>

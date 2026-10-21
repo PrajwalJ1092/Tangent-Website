@@ -25,7 +25,7 @@ export function ProjectLightbox({
 }: ProjectLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex)
   const [imgError, setImgError] = useState(false)
-  const isMotionSafe = useMotionSafe()
+  const { isMotionSafe } = useMotionSafe()
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
   // Keep currentIndex synced with initialIndex whenever lightbox opens
