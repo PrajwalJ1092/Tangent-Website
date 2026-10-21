@@ -19,6 +19,9 @@ import {
   CardHover,
   StaggerGroup,
   StaggerItem,
+  MaskedHeadline,
+  ParagraphReveal,
+  CharacterReveal,
 } from '@/components/motion'
 import { ProjectLightbox, type LightboxImage } from '@/components/projects'
 import { formatCategoryLabel } from '@/lib/formatters'
@@ -137,12 +140,11 @@ export function ProjectDetailPage() {
             </StaggerItem>
           </StaggerGroup>
 
-          <MaskedText
+          <MaskedHeadline
             as="h1"
+            text={project.title}
             className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#20211E] leading-[1.05]"
-          >
-            {project.title}
-          </MaskedText>
+          />
 
           <ScrollReveal delay={0.2}>
             <p className="font-sans text-lg sm:text-xl text-[#53554D] font-light leading-relaxed max-w-3xl">
@@ -261,7 +263,9 @@ export function ProjectDetailPage() {
             </h2>
             <div className="space-y-5 font-sans text-base sm:text-lg text-[#53554D] font-light leading-relaxed">
               {narrativeParagraphs.map((para, i) => (
-                <p key={i}>{para}</p>
+                <ParagraphReveal key={i} delay={i * 0.1}>
+                  {para}
+                </ParagraphReveal>
               ))}
             </div>
           </div>

@@ -15,6 +15,12 @@ import {
   CardHover,
   EditorialHeading,
   EditorialParagraph,
+  ParagraphReveal,
+  WordReveal,
+  CharacterReveal,
+  MaskedHeadline,
+  ImageExpansion,
+  ImageTransition,
 } from './index'
 
 describe('Tangent Global Motion Design System', () => {
@@ -193,7 +199,7 @@ describe('Tangent Global Motion Design System', () => {
     })
   })
 
-  describe('Editorial Typography (EditorialHeading, EditorialParagraph)', () => {
+  describe('Editorial Typography (EditorialHeading, EditorialParagraph, WordReveal, CharacterReveal, MaskedHeadline, ParagraphReveal)', () => {
     it('renders EditorialHeading with eyebrow and description', () => {
       render(
         <EditorialHeading
@@ -208,14 +214,80 @@ describe('Tangent Global Motion Design System', () => {
       expect(screen.getByText(/A study in natural illumination\./i)).toBeInTheDocument()
     })
 
-    it('renders EditorialParagraph with accessible paragraph text', () => {
+    it('renders EditorialParagraph and ParagraphReveal with accessible text', () => {
       render(
-        <EditorialParagraph>
+        <ParagraphReveal>
           Restrained spatial narrative text.
-        </EditorialParagraph>,
+        </ParagraphReveal>,
       )
 
       expect(screen.getByText(/Restrained spatial narrative text\./i)).toBeInTheDocument()
+    })
+
+    it('renders WordReveal with full phrase accessibility and individual word spans', () => {
+      render(
+        <WordReveal as="h3">
+          Architecture is the quiet dialogue
+        </WordReveal>,
+      )
+
+      expect(screen.getByRole('heading', { name: /Architecture is the quiet dialogue/i })).toBeInTheDocument()
+      expect(screen.getByText('Architecture')).toBeInTheDocument()
+      expect(screen.getByText('dialogue')).toBeInTheDocument()
+    })
+
+    it('renders CharacterReveal with accessible label', () => {
+      render(
+        <CharacterReveal as="span">
+          STUDIO MONOGRAPH
+        </CharacterReveal>,
+      )
+
+      expect(screen.getByLabelText('STUDIO MONOGRAPH')).toBeInTheDocument()
+    })
+
+    it('renders MaskedHeadline with multiple lines', () => {
+      render(
+        <MaskedHeadline
+          as="h1"
+          lines={['The space between an idea', 'and the place it becomes.']}
+        />,
+      )
+
+      expect(screen.getByText('The space between an idea')).toBeInTheDocument()
+      expect(screen.getByText('and the place it becomes.')).toBeInTheDocument()
+    })
+  })
+
+  describe('Architectural Image Systems (ImageExpansion, ImageTransition)', () => {
+    it('renders ImageExpansion with accessible image and caption', () => {
+      render(
+        <ImageExpansion
+          src="https://example.com/facade.jpg"
+          alt="Granite Facade Under Twilight"
+          caption="Fig 2.1 — Volumetric study"
+        />,
+      )
+
+      expect(screen.getByRole('img', { name: /Granite Facade Under Twilight/i })).toBeInTheDocument()
+      expect(screen.getByText(/Fig 2.1 — Volumetric study/i)).toBeInTheDocument()
+    })
+
+    it('renders ImageTransition with plate switcher and active plate', () => {
+      render(
+        <ImageTransition
+          plates={[
+            { id: '1', src: 'https://example.com/day.jpg', alt: 'Daytime View', label: 'Day' },
+            { id: '2', src: 'https://example.com/night.jpg', alt: 'Night Perspective', label: 'Night' },
+          ]}
+          caption="Day vs Night illumination"
+        />,
+      )
+
+      expect(screen.getByRole('img', { name: /Daytime View/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /View plate: Day/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /View plate: Night/i })).toBeInTheDocument()
+      expect(screen.getByText(/Day vs Night illumination/i)).toBeInTheDocument()
     })
   })
 })

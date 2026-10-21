@@ -1,11 +1,13 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { MaskedHeadline } from '@/components/motion'
 
 export interface PageHeadingProps extends HTMLAttributes<HTMLDivElement> {
   breadcrumbs?: ReactNode
   title: string
   subtitle?: string
   actions?: ReactNode
+  animateTitle?: boolean
 }
 
 export function PageHeading({
@@ -14,6 +16,7 @@ export function PageHeading({
   title,
   subtitle,
   actions,
+  animateTitle = true,
   ...props
 }: PageHeadingProps) {
   return (
@@ -26,10 +29,18 @@ export function PageHeading({
     >
       {breadcrumbs && <div>{breadcrumbs}</div>}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="space-y-3 max-w-3xl">
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#20211E] text-balance">
-            {title}
-          </h1>
+        <div className="space-y-3 max-w-3xl text-left">
+          {animateTitle ? (
+            <MaskedHeadline
+              as="h1"
+              text={title}
+              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#20211E] text-balance"
+            />
+          ) : (
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#20211E] text-balance">
+              {title}
+            </h1>
+          )}
           {subtitle && (
             <p className="font-sans text-base sm:text-lg text-[#53554D] leading-relaxed max-w-2xl text-pretty font-light">
               {subtitle}

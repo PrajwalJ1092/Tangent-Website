@@ -36,6 +36,8 @@ import {
   StaggerGroup,
   StaggerItem,
   CardHover,
+  MaskedHeadline,
+  CharacterReveal,
 } from '@/components/motion'
 import { getProductBySlug, getRelatedProducts } from '@/data/products'
 import { formatPaiseToInr, calculateDiscountPercent } from '@/lib/formatters'
@@ -357,12 +359,11 @@ export function ProductDetailPage() {
                 )}
               </div>
 
-              <MaskedText
+              <MaskedHeadline
                 as="h1"
+                text={product.name}
                 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#20211E] leading-tight font-normal"
-              >
-                {product.name}
-              </MaskedText>
+              />
 
               <p className="font-sans text-sm sm:text-base text-[#53554D] leading-relaxed font-light">
                 {product.shortDescription}

@@ -12,7 +12,7 @@ import {
 } from '@/lib/formatters'
 import { useCart } from '@/context'
 import { cn } from '@/lib/utils'
-import { CardHover } from '@/components/motion'
+import { CardHover, HoverUnderline } from '@/components/motion'
 
 export interface ProductCardProps {
   product: DigitalProduct
@@ -92,7 +92,9 @@ export function ProductCard({ product, className }: ProductCardProps) {
               to={`/shop/${product.slug}`}
               className="focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#20211E] rounded-sm"
             >
-              {product.name}
+              <HoverUnderline lineColor="bg-[#777B60]">
+                {product.name}
+              </HoverUnderline>
             </Link>
           </h3>
 

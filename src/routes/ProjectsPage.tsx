@@ -18,6 +18,8 @@ import {
   ImageReveal,
   CardHover,
   HoverUnderline,
+  MaskedHeadline,
+  CharacterReveal,
 } from '@/components/motion'
 import { ProjectIndexView } from '@/components/projects'
 import { formatCategoryLabel } from '@/lib/formatters'
@@ -59,14 +61,17 @@ export function ProjectsPage() {
           />
           <div className="space-y-4 max-w-4xl text-left">
             <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#777B60] block">
-              Monograph Archive · Vol. 01–06
+              <CharacterReveal text="Monograph Archive · Vol. 01–06" />
             </span>
-            <MaskedText
+            <MaskedHeadline
               as="h1"
+              lines={[
+                'Selected Commissions',
+                '& Spatial Works',
+              ]}
+              text="Selected Commissions & Spatial Works"
               className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#20211E] leading-[1.05]"
-            >
-              Selected Commissions & Spatial Works
-            </MaskedText>
+            />
             <ScrollReveal delay={0.2}>
               <p className="font-sans text-lg sm:text-xl text-[#53554D] font-light leading-relaxed max-w-3xl">
                 A comprehensive monograph of built residential pavilions, civic exhibition halls,

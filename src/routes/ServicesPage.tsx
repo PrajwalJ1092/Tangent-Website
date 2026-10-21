@@ -14,6 +14,9 @@ import {
 import {
   ScrollReveal,
   CardHover,
+  MaskedHeadline,
+  CharacterReveal,
+  ImageReveal,
 } from '@/components/motion'
 import { STUDIO_SERVICES } from '@/data/services'
 
@@ -85,14 +88,16 @@ export function ServicesPage() {
                   <div className={`space-y-6 ${isReversed ? 'lg:col-span-7 lg:order-2' : 'lg:col-span-7'}`}>
                     <div className="flex items-center gap-3">
                       <span className="text-xs font-mono uppercase tracking-widest text-[#777B60]">
-                        {service.code}
+                        <CharacterReveal text={service.code} />
                       </span>
                       <span className="w-8 h-[1px] bg-[#E9E5DC]" />
                     </div>
 
-                    <h2 className="font-serif text-3xl sm:text-4xl text-[#20211E] leading-tight">
-                      {service.title}
-                    </h2>
+                    <MaskedHeadline
+                      as="h2"
+                      text={service.title}
+                      className="font-serif text-3xl sm:text-4xl text-[#20211E] leading-tight"
+                    />
 
                     <p className="font-serif text-base text-[#777B60] italic">
                       "{service.tagline}"
@@ -143,11 +148,12 @@ export function ServicesPage() {
                   <div className={`${isReversed ? 'lg:col-span-5 lg:order-1' : 'lg:col-span-5'}`}>
                     <CardHover lift={4}>
                       <div className="border border-[#E9E5DC] bg-[#EFECE6]/40 p-3 space-y-4">
-                        <ImageFrame
+                        <ImageReveal
                           src={service.imageUrl}
                           alt={service.imageAlt}
                           aspectRatio="landscape"
-                          className="w-full object-cover"
+                          direction={isReversed ? 'left' : 'right'}
+                          hoverZoom
                         />
                         <div className="p-3 bg-white border border-[#E9E5DC] space-y-3">
                           <span className="text-[11px] font-mono uppercase text-[#777B60] block border-b border-[#E9E5DC] pb-2">

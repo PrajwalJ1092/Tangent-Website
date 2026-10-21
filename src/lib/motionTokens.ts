@@ -17,6 +17,8 @@ export const MOTION_EASINGS = {
   mask: [0.77, 0, 0.175, 1] as const,
   // Responsive micro-interaction curve for buttons, pills, and toggles
   snappy: [0.4, 0, 0.2, 1] as const,
+  // Continuous smooth curve for scroll-scrubbed typography
+  fluid: [0.25, 1, 0.5, 1] as const,
 }
 
 export const MOTION_DURATIONS = {
@@ -30,11 +32,15 @@ export const MOTION_DURATIONS = {
   reveal: 0.85,
   // Cinematic hero & atmospheric sequences
   cinematic: 1.25,
+  // Extended slow transitions for ambient shifts
+  slow: 1.6,
   // Page route transition
   page: 0.3,
 }
 
 export const MOTION_STAGGERS = {
+  character: 0.02,
+  word: 0.035,
   tight: 0.06,
   standard: 0.1,
   relaxed: 0.16,

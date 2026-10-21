@@ -16,6 +16,8 @@ import {
   StaggerGroup,
   StaggerItem,
   CardHover,
+  MaskedHeadline,
+  CharacterReveal,
 } from '@/components/motion'
 import {
   MARKETPLACE_CATEGORIES,
@@ -99,14 +101,17 @@ export function ShopPage() {
           />
           <div className="space-y-4 max-w-4xl text-left">
             <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#777B60] block">
-              Architectural Assets &amp; Specifications
+              <CharacterReveal text="Architectural Assets & Specifications" />
             </span>
-            <MaskedText
+            <MaskedHeadline
               as="h1"
+              lines={[
+                'Digital Tools',
+                '& Spatial Resources',
+              ]}
+              text="Digital Tools & Spatial Resources"
               className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#20211E] leading-[1.05]"
-            >
-              Digital Tools &amp; Spatial Resources
-            </MaskedText>
+            />
             <ScrollReveal delay={0.15}>
               <p className="font-sans text-lg sm:text-xl text-[#53554D] font-light leading-relaxed max-w-3xl">
                 Production-grade CAD libraries, tactile material scans, editorial monograph templates,

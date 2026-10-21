@@ -7,7 +7,7 @@ import {
   Badge,
   SEO,
 } from '@/components/ui'
-import { ScrollReveal, MaskedText, CardHover } from '@/components/motion'
+import { ScrollReveal, MaskedText, CardHover, MaskedHeadline, ParagraphReveal } from '@/components/motion'
 import { JOURNAL_ARTICLES } from '@/data/journal'
 
 export function JournalArticlePage() {
@@ -55,9 +55,12 @@ export function JournalArticlePage() {
             <span>{article.publishedAt}</span>
           </div>
 
-          <MaskedText as="h1" delay={0.1} className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#20211E] leading-tight">
-            {article.title}
-          </MaskedText>
+          <MaskedHeadline
+            as="h1"
+            text={article.title}
+            delay={0.1}
+            className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#20211E] leading-tight"
+          />
 
           <p className="font-serif text-base sm:text-lg text-[#777B60] italic max-w-2xl mx-auto leading-relaxed">
             "{article.subtitle}"
@@ -103,9 +106,9 @@ export function JournalArticlePage() {
               )}
 
               {section.paragraphs.map((p, pIdx) => (
-                <p key={pIdx} className="text-sm leading-relaxed text-[#53554D] font-sans">
+                <ParagraphReveal key={pIdx} delay={pIdx * 0.08} className="text-sm leading-relaxed text-[#53554D] font-sans">
                   {p}
-                </p>
+                </ParagraphReveal>
               ))}
 
               {section.quote && (

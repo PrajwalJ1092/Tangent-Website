@@ -22,6 +22,10 @@ import {
   StaggerGroup,
   StaggerItem,
   CardHover,
+  MaskedHeadline,
+  CharacterReveal,
+  ParagraphReveal,
+  HoverUnderline,
 } from '@/components/motion'
 import { STUDIO_CONFIG } from '@/data/studioInfo'
 import { PROJECTS } from '@/data/projects'
@@ -76,11 +80,13 @@ export function AboutPage() {
           <ScrollReveal variant="fade-up" duration={0.6}>
             <div className="max-w-2xl mb-12">
               <div className="text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
-                Spatial Philosophy
+                <CharacterReveal text="Spatial Philosophy" />
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#20211E] leading-tight">
-                Quiet permanence over ephemeral novelty
-              </h2>
+              <MaskedHeadline
+                as="h2"
+                text="Quiet permanence over ephemeral novelty"
+                className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#20211E] leading-tight"
+              />
               <p className="mt-4 text-sm text-[#53554D] leading-relaxed">
                 We reject transient architectural styles in pursuit of tectonic clarity. By stripping away extraneous decorative veneer, our buildings expose their structural logic, weathering gracefully with time.
               </p>
@@ -197,11 +203,13 @@ export function AboutPage() {
           <ScrollReveal variant="fade-up" duration={0.6}>
             <div className="max-w-xl mb-12">
               <div className="text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
-                Methodology
+                <CharacterReveal text="Methodology" />
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#20211E]">
-                Four-stage architectural journey
-              </h2>
+              <MaskedHeadline
+                as="h2"
+                text="Four-stage architectural journey"
+                className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#20211E]"
+              />
               <p className="mt-3 text-xs text-[#53554D] leading-relaxed">
                 Our commission lifecycle is structured to balance conceptual exploration with uncompromising engineering rigor.
               </p>
@@ -275,11 +283,13 @@ export function AboutPage() {
             <div>
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#777B60] mb-2">
                 <Users className="w-3.5 h-3.5" />
-                <span>Studio Leadership</span>
+                <CharacterReveal text="Studio Leadership" />
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl text-[#20211E]">
-                Architectural Direction &amp; Leadership
-              </h2>
+              <MaskedHeadline
+                as="h2"
+                text="Architectural Direction & Leadership"
+                className="font-serif text-2xl sm:text-3xl text-[#20211E]"
+              />
             </div>
             <Badge variant="outline" className="text-[10px] font-mono text-[#777B60] border-[#E9E5DC] self-start sm:self-auto">
               Configurable Studio Roles

@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
-import { ScrollReveal } from '@/components/motion'
+import { ScrollReveal, MaskedHeadline } from '@/components/motion'
 
 export interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
   eyebrow?: string
@@ -8,6 +8,7 @@ export interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
   description?: string
   action?: ReactNode
   align?: 'left' | 'center' | 'split'
+  animateTitle?: boolean
 }
 
 export function SectionHeading({
@@ -17,6 +18,7 @@ export function SectionHeading({
   description,
   action,
   align = 'left',
+  animateTitle = true,
   ...props
 }: SectionHeadingProps) {
   if (align === 'split') {
@@ -34,9 +36,17 @@ export function SectionHeading({
               {eyebrow}
             </span>
           )}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#20211E] text-balance">
-            {title}
-          </h2>
+          {animateTitle ? (
+            <MaskedHeadline
+              text={title}
+              as="h2"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#20211E] text-balance"
+            />
+          ) : (
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#20211E] text-balance">
+              {title}
+            </h2>
+          )}
           {description && (
             <p className="font-sans text-sm sm:text-base text-[#53554D] leading-relaxed text-pretty">
               {description}
@@ -63,9 +73,17 @@ export function SectionHeading({
           {eyebrow}
         </span>
       )}
-      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#20211E] text-balance">
-        {title}
-      </h2>
+      {animateTitle ? (
+        <MaskedHeadline
+          text={title}
+          as="h2"
+          className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#20211E] text-balance"
+        />
+      ) : (
+        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-[#20211E] text-balance">
+          {title}
+        </h2>
+      )}
       {description && (
         <p className="font-sans text-sm sm:text-base text-[#53554D] leading-relaxed text-pretty">
           {description}

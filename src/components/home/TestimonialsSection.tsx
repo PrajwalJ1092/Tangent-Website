@@ -1,6 +1,6 @@
 import { Container } from '@/components/ui'
 import { Quote } from 'lucide-react'
-import { StaggerGroup, StaggerItem, CardHover, ScrollReveal } from '@/components/motion'
+import { StaggerGroup, StaggerItem, CardHover, ScrollReveal, MaskedHeadline, CharacterReveal } from '@/components/motion'
 
 interface PatronTestimonial {
   id: string
@@ -56,11 +56,13 @@ export function TestimonialsSection() {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E9E5DC] pb-6">
               <div className="space-y-2 text-left">
                 <span className="font-mono text-xs uppercase tracking-[0.22em] text-[#777B60] block">
-                  Patron &amp; Jury Dialogue
+                  <CharacterReveal text="Patron & Jury Dialogue" />
                 </span>
-                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#20211E] tracking-tight">
-                  Reflections on Built Form
-                </h2>
+                <MaskedHeadline
+                  as="h2"
+                  text="Reflections on Built Form"
+                  className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#20211E] tracking-tight"
+                />
               </div>
               <div className="text-left sm:text-right">
                 <span className="text-[11px] font-mono text-[#797C72] uppercase tracking-wider block">

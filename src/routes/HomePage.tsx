@@ -32,6 +32,10 @@ import {
   SectionTransition,
   CardHover,
   HoverUnderline,
+  MaskedHeadline,
+  CharacterReveal,
+  ParagraphReveal,
+  WordReveal,
 } from '@/components/motion'
 import { STUDIO_CONFIG } from '@/data/studioInfo'
 
@@ -84,25 +88,23 @@ export function HomePage() {
                   <Badge variant="accent">Studio Philosophy</Badge>
                 </ScrollReveal>
 
-                <MaskedText
+                <MaskedHeadline
+                  lines={[
+                    'We believe architecture is the quiet dialogue',
+                    'between human perception and geological permanence.',
+                  ]}
                   as="h2"
                   className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-[#20211E] tracking-tight leading-[1.08] text-balance"
-                >
-                  We believe architecture is the quiet dialogue between human perception and geological permanence.
-                </MaskedText>
+                />
 
-                <StaggerGroup stagger={0.12} className="space-y-5 font-sans text-sm sm:text-base text-[#53554D] leading-relaxed font-light max-w-2xl">
-                  <StaggerItem>
-                    <p>
-                      Every commission begins with an exacting topographical audit and solar azimuth study. We eschew superfluous ornamentation in pursuit of volumetric purity, authentic tactile surfaces, and climatic resilience.
-                    </p>
-                  </StaggerItem>
-                  <StaggerItem>
-                    <p>
-                      Our built projects range from single-family sanctuaries rooted in remote coastal bluffs to civic exhibition spaces engineered with post-tensioned concrete cantilevers.
-                    </p>
-                  </StaggerItem>
-                </StaggerGroup>
+                <div className="space-y-5 font-sans text-sm sm:text-base text-[#53554D] leading-relaxed font-light max-w-2xl">
+                  <ParagraphReveal delay={0.1}>
+                    Every commission begins with an exacting topographical audit and solar azimuth study. We eschew superfluous ornamentation in pursuit of volumetric purity, authentic tactile surfaces, and climatic resilience.
+                  </ParagraphReveal>
+                  <ParagraphReveal delay={0.2}>
+                    Our built projects range from single-family sanctuaries rooted in remote coastal bluffs to civic exhibition spaces engineered with post-tensioned concrete cantilevers.
+                  </ParagraphReveal>
+                </div>
 
                 <ScrollReveal variant="fade-up" delay={0.25} className="pt-4 flex flex-wrap items-center gap-6">
                   <TextLink to="/about" showArrow className="text-sm font-mono uppercase tracking-wider">
@@ -614,15 +616,17 @@ export function HomePage() {
 
               <div className="relative z-10 max-w-3xl space-y-8 text-left">
                 <span className="font-mono text-xs uppercase tracking-[0.24em] font-medium text-[#777B60]">
-                  Commission Brief
+                  <CharacterReveal text="Commission Brief" />
                 </span>
 
-                <MaskedText
+                <MaskedHeadline
+                  lines={[
+                    'Have a spatial commission or digital asset',
+                    'licensing project in mind?',
+                  ]}
                   as="h2"
                   className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-white leading-[1.08] text-balance"
-                >
-                  Have a spatial commission or digital asset licensing project in mind?
-                </MaskedText>
+                />
 
                 <p className="font-sans text-base sm:text-lg text-[#E9E5DC]/80 leading-relaxed font-light max-w-xl">
                   We accept a limited number of bespoke architectural and interior commissions annually to maintain uncompromised craftsmanship.
